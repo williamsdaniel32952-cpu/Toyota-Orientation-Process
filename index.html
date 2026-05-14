@@ -7928,7 +7928,13 @@ function moduleStep(delta) {
 })();
 
 function moduleIntroVideoKey(moduleId) { return `${moduleId}::-1`; }
-function hasModuleIntroVideo(moduleId) { return !!getAssignedVideo(moduleId, -1); }
+function hasModuleIntroVideo(moduleId) {
+  // Always show the intro page. The page itself tries to load the
+  // conventional intro video at assets/videos/moduleN/moduleN-intro.mp4 —
+  // if the file is there, it plays; if not, the page shows a friendly
+  // empty state and the learner can click Continue.
+  return true;
+}
 
 function renderModuleIntroAdminControls(moduleId) {
   if (!isAdminPreviewUser()) return '';
