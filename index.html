@@ -3432,10 +3432,13 @@ function renderModuleQuiz(mod) {
           <div class="text-base font-semibold text-slate-900 mb-4">${escapeHtml(q.q)}</div>
           ${q.choices.map((choice, ci) => {
             let cls = 'quiz-choice';
-            // Once submitted, lock the buttons but do NOT reveal which
-            // were correct or incorrect. The learner sees only their
-            // overall score; they can retake or review the training.
-            if (!submitted && answers[qi] === ci) cls += ' selected';
+            if (submitted) {
+              if (answers[qi] === ci) {
+                cls += (ci === q.answer) ? ' correct' : ' incorrect';
+              }
+            } else if (answers[qi] === ci) {
+              cls += ' selected';
+            }
             return `<button class="${cls}" ${submitted ? 'disabled' : ''} onclick="selectAnswer(${qi}, ${ci})">
               ${escapeHtml(choice)}
             </button>`;
@@ -3834,8 +3837,13 @@ function renderSlideQuiz(mod) {
           <div class="text-base font-semibold text-slate-900 mb-4">${escapeHtml(q.q)}</div>
           ${q.choices.map((choice, ci) => {
             let cls = 'quiz-choice';
-            // After submit: lock buttons but don't reveal correct/incorrect.
-            if (!submitted && answers[qi] === ci) cls += ' selected';
+            if (submitted) {
+              if (answers[qi] === ci) {
+                cls += (ci === q.answer) ? ' correct' : ' incorrect';
+              }
+            } else if (answers[qi] === ci) {
+              cls += ' selected';
+            }
             return `<button class="${cls}" ${submitted ? 'disabled' : ''} onclick="selectAnswer(${qi}, ${ci})">
               ${escapeHtml(choice)}
             </button>`;
@@ -8097,7 +8105,13 @@ function renderSectionCheckpoint(mod) {
           <div class="text-base font-semibold text-slate-900 mb-4">${escapeHtml(q.q)}</div>
           ${q.choices.map((choice, ci) => {
             let cls = 'quiz-choice';
-            if (!submitted && answers[qi] === ci) cls += ' selected';
+            if (submitted) {
+              if (answers[qi] === ci) {
+                cls += (ci === q.answer) ? ' correct' : ' incorrect';
+              }
+            } else if (answers[qi] === ci) {
+              cls += ' selected';
+            }
             return `<button class="${cls}" ${submitted ? 'disabled' : ''} onclick="selectAnswer(${qi}, ${ci})">
               ${escapeHtml(choice)}
             </button>`;
