@@ -1630,63 +1630,238 @@ S — When walking on steps, always use the handrails and plant your feet firmly
   {
     id: 'epic',
     num: 7,
-    title: 'EPIC Inspector Processes',
+    title: 'Data Entry and Documents',
     icon: 'clipboardCheck',
-    estMin: 15,
+    estMin: 25,
+    /* ----------------------------------------------------------------
+       SECTIONS — each section is a video slot. Drop the matching MP4
+       into assets/videos/module7/module7-sectionN.mp4 (1-based) and it
+       auto-loads. Empty body intentionally — heading + video only.
+       ---------------------------------------------------------------- */
     sections: [
+      { heading: 'Sign In Log', body: `` },
+      { heading: 'Inspector Self Audits', body: `` },
+      { heading: 'WIS Signature Sheets', body: `` },
+      { heading: 'Blind Tally Sheets', body: `` },
+      { heading: 'Data Sheets — Video 1', body: `` },
+      { heading: 'Data Sheets — Video 2', body: `` },
+    ],
+    /* ----------------------------------------------------------------
+       CHECKPOINTS — mid-module quizzes that appear AFTER the listed
+       section index (1-based). Learner must score 80% to continue.
+       No final-answer feedback is shown — only a pass/fail score.
+       ---------------------------------------------------------------- */
+    checkpoints: [
       {
-        heading: 'EPIC Inspector Field Guide',
-        body: `EPIC stands for the inspection methodology TRIGO uses on the floor. The EPIC Inspector Field Guide (Training Session 05d) is your day-to-day reference for sort, inspection, and rework documentation. You will receive a printed copy.`,
+        afterSection: 1,
+        title: 'Sign In Log Checkpoint',
+        quiz: [
+          {
+            q: 'What information must each team member provide when signing in at the beginning of every shift?',
+            choices: [
+              'Just their first name',
+              'Their full name and employee number',
+              'Only their employee number',
+              'A nickname is acceptable',
+            ],
+            answer: 1,
+          },
+          {
+            q: 'What does the Safety Talk section of the Sign In Log confirm?',
+            choices: [
+              'That overtime was approved',
+              'That team members participated in the required safety communication before beginning work',
+              'That PPE was distributed',
+              'That the supervisor was on site',
+            ],
+            answer: 1,
+          },
+          {
+            q: 'Why must the Time In and Time Out fields be completed accurately?',
+            choices: [
+              'To ensure proper labor tracking and customer reporting',
+              'To determine who gets a break first',
+              'It is optional information',
+              'For social media posts',
+            ],
+            answer: 0,
+          },
+        ],
       },
       {
-        heading: 'Self-Audit',
-        body: `Inspectors at TMMMS complete the TMMMS Toyota Inspector Self-Audit (Form F 3.8) on a regular cadence. This is how you confirm — in your own words and signature — that your inspection method matches the WIS (Work Instruction Sheet) for your assigned sort.`,
+        afterSection: 2,
+        title: 'Inspector Self Audits Checkpoint',
+        quiz: [
+          {
+            q: 'What three categories is the Inspector Self Audit form divided into?',
+            choices: [
+              'Safety, Sort Requirements, and 5S',
+              'Quality, Productivity, and Attendance',
+              'Hourly, Daily, and Weekly checks',
+              'PPE, Tools, and Equipment',
+            ],
+            answer: 0,
+          },
+          {
+            q: 'What is the primary purpose of completing the Inspector Self Audit?',
+            choices: [
+              'To track overtime hours',
+              'To assign new projects',
+              'To identify problems early before they impact quality, safety, or customer satisfaction',
+              'To replace the work instruction sheet',
+            ],
+            answer: 2,
+          },
+          {
+            q: 'What does the 5S section of the Self Audit verify?',
+            choices: [
+              'That five inspectors are on site',
+              'That the work area remains clean, organized, and audit ready',
+              'That five defects have been found',
+              'That production hit five units per hour',
+            ],
+            answer: 1,
+          },
+        ],
       },
       {
-        heading: 'Sort & Rework Documentation',
-        body: `Every shift you will document on the TMMMS Sort/Rework Data Sheet:
-• Date, shift, project / part number
-• Total inspected
-• OK count and NG (Not Good) count
-• Specific defect categories
-• Comments — including escalations to Lead Hand (with names and sequence numbers when available)
-
-The Blind Tally (Form F 9.17, rev 03/04/24) is used for blind verification counts to confirm sort accuracy.`,
+        afterSection: 3,
+        title: 'WIS Signature Sheets Checkpoint',
+        quiz: [
+          {
+            q: 'What does an inspector\u2019s signature on the WIS Signature Sheet confirm?',
+            choices: [
+              'That they are clocked in',
+              'That they have received training and understand the inspection process and safety requirements for the project',
+              'That they have ordered new PPE',
+              'That they are leaving for break',
+            ],
+            answer: 1,
+          },
+          {
+            q: 'When must all signatures on the WIS Signature Sheet be completed?',
+            choices: [
+              'At the end of the project',
+              'Whenever the inspector remembers',
+              'Clearly and accurately before inspectors begin independent work',
+              'Only during customer audits',
+            ],
+            answer: 2,
+          },
+        ],
       },
       {
-        heading: 'WIS Training Sign-Off',
-        body: `Before you sort or inspect on a new project, you must be signed off on the WIS for that project. The TMMMS WIS Training Sign-Off form (rev 03/04/24) records: project, date, trainer, trainee, and confirmation of competence. Do NOT begin a new sort without WIS sign-off — this is a quality and traceability requirement.`,
+        afterSection: 4,
+        title: 'Blind Tally Sheets Checkpoint',
+        quiz: [
+          {
+            q: 'What is the main purpose of blind tally tracking?',
+            choices: [
+              'To replace the data sheet',
+              'To ensure accurate reporting and prevent data manipulation during containment operations',
+              'To shorten the inspection time',
+              'To record breaks taken',
+            ],
+            answer: 1,
+          },
+          {
+            q: 'What is recorded in the main table of the Blind Tally Sheet?',
+            choices: [
+              'Inspector personal contact details',
+              'Customer billing information',
+              'Kanban numbers and production counts throughout the shift',
+              'Shift meal preferences',
+            ],
+            answer: 2,
+          },
+        ],
       },
       {
-        heading: 'Toyota Body Sequence Sheet',
-        body: `The Toyota Body Sequence Sheet tracks individual vehicles through your inspection point by sequence number. When you find an NG, the sequence number is your traceability key — record it on the data sheet and in any escalation comment.`,
+        afterSection: 5,
+        title: 'Data Sheets Checkpoint',
+        quiz: [
+          {
+            q: 'What is recorded in the center section of the SOR/Rework Data Sheet?',
+            choices: [
+              'Only the supplier name',
+              'The company logo and color scheme',
+              'Inspected quantities, rework quantities, scrap quantities, order numbers, and operator information',
+              'The cafeteria menu',
+            ],
+            answer: 2,
+          },
+          {
+            q: 'Why are accurate time tracking, revision levels, and tag information critical on the Data Sheet?',
+            choices: [
+              'They connect the inspection results to the approved work instructions',
+              'They are only needed for archive purposes',
+              'They determine bonus payouts',
+              'They are decorative fields',
+            ],
+            answer: 0,
+          },
+          {
+            q: 'What does the top section of the SOR/Rework Data Sheet identify?',
+            choices: [
+              'The supplier, tracking number, part name, defect type, and process location',
+              'Only the inspector\u2019s name',
+              'The customer\u2019s mailing address',
+              'The next holiday schedule',
+            ],
+            answer: 0,
+          },
+        ],
       },
     ],
+    /* ----------------------------------------------------------------
+       FINAL QUIZ — 5 questions covering everything. Pass at 80%.
+       No correct-answer feedback shown on submission.
+       ---------------------------------------------------------------- */
     quiz: [
       {
-        q: 'You are starting a new sort project. What is required BEFORE you begin sorting?',
+        q: 'On the TRIGO Sign In Log, what can result from incomplete or inaccurate sign-in information?',
         choices: [
-          'Permission from any team member',
-          'WIS Training Sign-Off for that specific project',
-          'Just read the data sheet',
-          'Nothing — start sorting immediately',
+          'Nothing of consequence',
+          'Payroll issues, customer concerns, or audit findings',
+          'Faster shift completion',
+          'A bonus for the inspector',
         ],
         answer: 1,
       },
       {
-        q: 'When you find an NG vehicle, what is the critical traceability data point to record?',
-        choices: ['Time of day', 'Sequence number', 'Color of car', 'Your shoe size'],
+        q: 'What does the Site Leader signature on the WIS Signature Sheet confirm?',
+        choices: [
+          'That the inspector has been properly trained and observed performing the inspection process',
+          'That the site leader is on vacation',
+          'That overtime is approved',
+          'That the customer has paid the invoice',
+        ],
+        answer: 0,
+      },
+      {
+        q: 'Which section of the Inspector Self Audit verifies that work instructions, setup sheets, labels, revision levels, and process controls are correct and available?',
+        choices: ['Safety', 'Sort Requirements', '5S', 'None of the above'],
         answer: 1,
       },
       {
-        q: 'What is the purpose of the Blind Tally form?',
+        q: 'What three things does the Blind Tally Sheet support?',
         choices: [
-          'A guess at the count',
-          'Blind verification counts to confirm sort accuracy',
-          'A backup form in case you lose the original',
-          'For night shift only',
+          'Traceability, customer reporting, and operational accountability',
+          'Lunch, breaks, and overtime',
+          'Hiring, training, and termination',
+          'Sales, marketing, and HR',
         ],
-        answer: 1,
+        answer: 0,
+      },
+      {
+        q: 'What can missing information on the SOR/Rework Data Sheet create?',
+        choices: [
+          'A shorter inspection time',
+          'An automatic pay raise',
+          'Major reporting gaps or customer concerns',
+          'No impact at all',
+        ],
+        answer: 2,
       },
     ],
   },
@@ -3257,10 +3432,10 @@ function renderModuleQuiz(mod) {
           <div class="text-base font-semibold text-slate-900 mb-4">${escapeHtml(q.q)}</div>
           ${q.choices.map((choice, ci) => {
             let cls = 'quiz-choice';
-            if (submitted) {
-              if (ci === q.answer) cls += ' correct';
-              else if (answers[qi] === ci) cls += ' incorrect';
-            } else if (answers[qi] === ci) cls += ' selected';
+            // Once submitted, lock the buttons but do NOT reveal which
+            // were correct or incorrect. The learner sees only their
+            // overall score; they can retake or review the training.
+            if (!submitted && answers[qi] === ci) cls += ' selected';
             return `<button class="${cls}" ${submitted ? 'disabled' : ''} onclick="selectAnswer(${qi}, ${ci})">
               ${escapeHtml(choice)}
             </button>`;
@@ -3275,13 +3450,13 @@ function renderModuleQuiz(mod) {
           </div>
           <div class="text-3xl font-black mb-1" style="color:${passed ? 'var(--slate-900)' : 'var(--red-dark)'};">${pct}%</div>
           <div class="text-sm" style="color:${passed ? 'var(--slate-700)' : 'var(--red-dark)'};">
-            ${correct} of ${total} correct · ${passed ? 'Knowledge check complete.' : 'You need 80% to pass. Review the material and try again.'}
+            Score: ${correct} of ${total}. ${passed ? 'Knowledge check complete.' : 'You need 80% to pass. Review the training and try again.'}
           </div>
         </div>
         <div class="flex gap-3">
           ${passed
             ? `<button class="btn-primary" onclick="completeModuleAndShowCert(${pct})">View Certificate ${icon('chevronRight', 14)}</button>`
-            : `<button class="btn-primary" onclick="setState({modulePhase:'content', moduleStep:0})">Review Content</button>
+            : `<button class="btn-primary" onclick="setState({modulePhase:'content', moduleStep:0})">Review Training</button>
                <button class="btn-ghost" onclick="setState({quizAnswers:{}, quizSubmitted:false})">Retry Quiz</button>`}
         </div>
       ` : `
@@ -3659,10 +3834,8 @@ function renderSlideQuiz(mod) {
           <div class="text-base font-semibold text-slate-900 mb-4">${escapeHtml(q.q)}</div>
           ${q.choices.map((choice, ci) => {
             let cls = 'quiz-choice';
-            if (submitted) {
-              if (ci === q.answer) cls += ' correct';
-              else if (answers[qi] === ci) cls += ' incorrect';
-            } else if (answers[qi] === ci) cls += ' selected';
+            // After submit: lock buttons but don't reveal correct/incorrect.
+            if (!submitted && answers[qi] === ci) cls += ' selected';
             return `<button class="${cls}" ${submitted ? 'disabled' : ''} onclick="selectAnswer(${qi}, ${ci})">
               ${escapeHtml(choice)}
             </button>`;
@@ -3677,8 +3850,8 @@ function renderSlideQuiz(mod) {
           </div>
           <div class="text-3xl font-black mb-1" style="color:${passed ? 'var(--slate-900)' : 'var(--red-dark)'};">${pct}%</div>
           <div class="text-sm" style="color:${passed ? 'var(--slate-700)' : 'var(--red-dark)'};">
-            ${correct} of ${quiz.length} correct.
-            ${passed ? (isFinal ? ' Module complete!' : ' Continuing to slides…') : ` You need ${passThreshold}% to pass. Review and try again.`}
+            Score: ${correct} of ${quiz.length}.
+            ${passed ? (isFinal ? ' Module complete!' : ' Continuing to slides…') : ` You need ${passThreshold}% to pass. Review the training and try again.`}
           </div>
         </div>
         <div class="flex gap-3">
@@ -5893,6 +6066,24 @@ function renderSectionVideoSlot(moduleId, sectionIdx) {
     return '';
   }
 
+  // No admin assignment for a regular section — try the conventional
+  // per-section path: assets/videos/moduleN/moduleN-sectionN.mp4.
+  // Drop a file there and it shows up here automatically. Missing file =
+  // hidden silently via <video onerror>.
+  if (!a && sectionIdx >= 0) {
+    const convSectionVideo = conventionalSectionVideoPath(moduleId, sectionIdx);
+    if (convSectionVideo) {
+      return `
+        <div class="bg-slate-50 border rounded-sm p-4 my-6" data-conv-video-wrap>
+          <div class="flex items-center gap-2 mb-3">
+            <span style="background:var(--navy); color:white; padding:2px 10px; border-radius:2px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;">Video</span>
+          </div>
+          <video controls playsinline preload="metadata" style="width:100%; max-height:480px; border-radius:4px; background:#000;" src="${convSectionVideo}"
+            onerror="this.closest('[data-conv-video-wrap]').style.display='none'"></video>
+        </div>`;
+    }
+  }
+
   if (!a) return ''; // No video for this section
 
   // URL-based assignment (works on all devices).
@@ -7465,6 +7656,19 @@ function conventionalVideoPath(moduleId) {
   if (!mod) return null;
   return `assets/videos/module${mod.num}/module${mod.num}-intro.mp4`;
 }
+/* ----------------------------------------------------------------
+   Per-section conventional video path.
+   Drop a file at this path and the matching section will auto-play it.
+     assets/videos/moduleN/moduleN-sectionN.mp4   (1-based section index)
+   Example: 3rd section of Module 7 -> assets/videos/module7/module7-section3.mp4
+   If the file is missing, the player hides itself silently via <video onerror>.
+   ---------------------------------------------------------------- */
+function conventionalSectionVideoPath(moduleId, sectionIdx) {
+  const mod = MODULES.find(m => m.id === moduleId);
+  if (!mod) return null;
+  // sectionIdx is 0-based internally; filenames use 1-based to match slide images.
+  return `assets/videos/module${mod.num}/module${mod.num}-section${sectionIdx + 1}.mp4`;
+}
 
 function renderSlideSupportImage(moduleId, sectionIdx, section) {
   // First priority: a real file at the conventional path. This works on
@@ -7785,6 +7989,11 @@ function importContentDataFile(file) {
 }
 
 function renderModuleContent(mod) {
+  // Mid-module checkpoint screen overrides regular section rendering.
+  if (state.modulePhase === 'sectionCheckpoint') {
+    return renderSectionCheckpoint(mod);
+  }
+
   const idx = state.moduleStep;
   const sections = mod.sections || [];
   const section = sections[idx];
@@ -7838,9 +8047,137 @@ function renderModuleContent(mod) {
     </div>
   `;
 }
+
+/* ----------------------------------------------------------------
+   Mid-module checkpoint helpers. A checkpoint is defined on a module
+   as { afterSection: N (1-based), title, quiz: [...] }. When the
+   learner finishes section N and clicks Next, the next screen is the
+   checkpoint quiz instead of section N+1. They must score 80% to
+   continue. No correct-answer feedback is shown.
+   ---------------------------------------------------------------- */
+function getSectionCheckpoint(mod, sectionIdx0Based) {
+  if (!mod || !Array.isArray(mod.checkpoints)) return null;
+  const oneBased = sectionIdx0Based + 1;
+  return mod.checkpoints.find(c => c.afterSection === oneBased) || null;
+}
+
+function renderSectionCheckpoint(mod) {
+  const cp = state.activeSectionCheckpoint;
+  if (!cp) return renderModuleContent(mod); // safety fallback
+  const submitted = state.quizSubmitted;
+  const answers = state.quizAnswers;
+  const quiz = cp.quiz;
+  const total = quiz.length;
+  let correct = 0;
+  if (submitted) {
+    correct = quiz.reduce((acc, q, i) => acc + (answers[i] === q.answer ? 1 : 0), 0);
+  }
+  const pct = submitted ? Math.round((correct / total) * 100) : 0;
+  const passed = pct >= 80;
+  const allAnswered = quiz.every((_, i) => answers[i] !== undefined);
+
+  return `
+    ${renderTopHeader()}
+
+    <div class="bg-white border-b">
+      <div class="max-w-4xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between mb-2">
+          <button class="btn-ghost" onclick="cancelSectionCheckpoint()">${icon('arrowLeft', 14)} Review Training</button>
+          <div class="text-xs uppercase tracking-widest font-bold text-slate-500">Checkpoint</div>
+        </div>
+        <h1 class="text-xl font-black text-slate-900">${escapeHtml(cp.title)}</h1>
+        <div class="text-xs text-slate-500 mt-1">${total} question${total === 1 ? '' : 's'} \u00b7 Pass at 80%</div>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 py-8">
+      ${quiz.map((q, qi) => `
+        <div class="bg-white p-6 rounded-sm border mb-4">
+          <div class="text-xs uppercase tracking-widest font-bold text-slate-500 mb-2">Question ${qi + 1}</div>
+          <div class="text-base font-semibold text-slate-900 mb-4">${escapeHtml(q.q)}</div>
+          ${q.choices.map((choice, ci) => {
+            let cls = 'quiz-choice';
+            if (!submitted && answers[qi] === ci) cls += ' selected';
+            return `<button class="${cls}" ${submitted ? 'disabled' : ''} onclick="selectAnswer(${qi}, ${ci})">
+              ${escapeHtml(choice)}
+            </button>`;
+          }).join('')}
+        </div>
+      `).join('')}
+
+      ${submitted ? `
+        <div class="p-6 rounded-sm border-2 mb-4" style="background:${passed ? 'var(--slate-50)' : 'var(--red-bg)'}; border-color:${passed ? 'var(--green)' : 'var(--red)'};">
+          <div class="text-xs uppercase tracking-widest font-bold mb-1" style="color:${passed ? 'var(--slate-900)' : 'var(--red-dark)'};">
+            ${passed ? 'Passed' : 'Try again'}
+          </div>
+          <div class="text-3xl font-black mb-1" style="color:${passed ? 'var(--slate-900)' : 'var(--red-dark)'};">${pct}%</div>
+          <div class="text-sm" style="color:${passed ? 'var(--slate-700)' : 'var(--red-dark)'};">
+            Score: ${correct} of ${total}. ${passed ? 'Continuing to the next section\u2026' : 'You need 80% to continue. Review the training and try again.'}
+          </div>
+        </div>
+        <div class="flex gap-3">
+          ${passed
+            ? `<button class="btn-primary" onclick="passSectionCheckpoint()">Continue ${icon('chevronRight', 14)}</button>`
+            : `<button class="btn-ghost" onclick="cancelSectionCheckpoint()">Review Training</button>
+               <button class="btn-primary" onclick="setState({quizAnswers:{}, quizSubmitted:false})">Retry</button>`}
+        </div>
+      ` : `
+        ${isPreviewBypassUser() ? `
+          <div class="p-4 rounded-sm border mb-4" style="background:#fef3c7; border-color:#fde68a;">
+            <div class="text-xs font-bold uppercase tracking-widest" style="color:#92400e;">${isDemoModeUser() ? 'Demo Preview' : 'Admin Preview'}</div>
+            <div class="text-sm text-slate-700 mt-1">You can view this checkpoint without answering it.</div>
+          </div>
+          <button class="btn-primary" onclick="passSectionCheckpoint()">Continue Without Taking Checkpoint ${icon('chevronRight', 14)}</button>
+        ` : `
+          <button class="btn-primary" ${allAnswered ? '' : 'disabled'} onclick="submitQuiz()">Submit Answers</button>
+          <div class="text-xs text-slate-500 mt-2">${allAnswered ? 'Ready to submit.' : 'Answer all questions to submit.'}</div>
+        `}
+      `}
+    </div>
+  `;
+}
+
+function passSectionCheckpoint() {
+  // Advance to the next section and exit checkpoint phase.
+  const mod = getModule(state.activeModuleId);
+  const total = mod && mod.sections ? mod.sections.length : 1;
+  setState({
+    modulePhase: 'content',
+    activeSectionCheckpoint: null,
+    quizAnswers: {},
+    quizSubmitted: false,
+    moduleStep: Math.min(total - 1, state.moduleStep + 1),
+  });
+}
+
+function cancelSectionCheckpoint() {
+  // Return to the section the learner was on without advancing.
+  setState({
+    modulePhase: 'content',
+    activeSectionCheckpoint: null,
+    quizAnswers: {},
+    quizSubmitted: false,
+  });
+}
+
 function moduleStep(delta) {
   const mod = getModule(state.activeModuleId);
   const total = mod && mod.sections ? mod.sections.length : 1;
+  // Forward step: check if the section we're leaving has a checkpoint.
+  if (delta > 0) {
+    const cp = getSectionCheckpoint(mod, state.moduleStep);
+    if (cp && !isPreviewBypassUser()) {
+      // Route to the checkpoint screen; do NOT advance moduleStep yet.
+      setState({
+        modulePhase: 'sectionCheckpoint',
+        activeSectionCheckpoint: cp,
+        quizAnswers: {},
+        quizSubmitted: false,
+      });
+      return;
+    }
+    // Admin/demo users get to bypass the checkpoint and advance directly.
+  }
   setState({ moduleStep: Math.max(0, Math.min(total - 1, state.moduleStep + delta)) });
 }
 
