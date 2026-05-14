@@ -7231,10 +7231,10 @@ const UKG_STEP5_URI = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA
 function renderSectionExtras(moduleId, sectionIdx) {
   // Module 1 (new-hire-info)
   if (moduleId === 'new-hire-info') {
-    // Section 1 (TRIGO Core Values): four-pillars SVG
-    if (sectionIdx === 1) {
-      return `<div style="margin-top:24px;">${FOUR_PILLARS_SVG}</div>`;
-    }
+    // Section 1 (slide 2 in the UI — TRIGO Core Values): image loads from
+    // assets/images/module1/slide2.jpg via the conventional path. The
+    // four-pillars graphic that used to be inline here was removed so the
+    // numbering stays predictable (slide N → slideN.jpg, no exceptions).
     // Section 2 (TRIGO US Employee Handbook): link to Module 10 (slide-deck)
     if (sectionIdx === 2) {
       return `
