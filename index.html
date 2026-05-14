@@ -7989,12 +7989,27 @@ function renderModuleIntroVideoPage(mod) {
         ${assignment ? `
           <p class="text-sm text-slate-600 mb-4">Watch the introduction video, then continue to the module.</p>
           ${renderSectionVideoSlot(mod.id, -1)}
-        ` : `
-          <div class="module-intro-empty">
-            <div class="text-sm font-bold mb-1">No module introduction video assigned yet.</div>
-            <div class="text-xs">Administrators can add one above. Learners will skip this page until a video is assigned.</div>
-          </div>
-        `}
+        ` : (() => {
+          // No admin-uploaded assignment — try the conventional repo path.
+          // The video element's onerror handler swaps to the empty-state
+          // message if the file doesn't exist on the server.
+          const convVideo = conventionalVideoPath(mod.id);
+          if (!convVideo) {
+            return `
+              <div class="module-intro-empty">
+                <div class="text-sm font-bold mb-1">No module introduction video assigned yet.</div>
+                <div class="text-xs">Click Continue to begin the module.</div>
+              </div>
+            `;
+          }
+          return `
+            <div data-conv-video-wrap>
+              <p class="text-sm text-slate-600 mb-4">Watch the introduction video, then continue to the module.</p>
+              <video controls playsinline preload="metadata" style="width:100%; max-height:480px; border-radius:4px; background:#000;" src="${convVideo}"
+                onerror="this.closest('[data-conv-video-wrap]').innerHTML='<div class=&quot;module-intro-empty&quot;><div class=&quot;text-sm font-bold mb-1&quot;>No module introduction video uploaded yet.</div><div class=&quot;text-xs&quot;>Click Continue to begin the module.</div></div>'"></video>
+            </div>
+          `;
+        })()}
       </div>
       <div class="flex items-center justify-between gap-4">
         <button class="btn-ghost" onclick="navigate('dashboard')">${icon('chevronLeft', 14)} Back</button>
