@@ -2020,6 +2020,15 @@ S — When walking on steps, always use the handrails and plant your feet firmly
     estMin: 20,
     kind: 'slides',
     slides: SAFETY_SLIDES,
+    // Optional video shown after the final slide and before the final exam.
+    // Place the MP4 in the Git repo at:
+    //   assets/videos/module9/module9-after-slides.mp4
+    // Fallback names are also checked to make uploading easier.
+    afterSlidesVideo: [
+      'assets/videos/module9/module9-after-slides.mp4',
+      'assets/videos/module9/module9-video.mp4',
+      'assets/videos/module9/module9.mp4',
+    ],
     // Checkpoints: 2 questions each, triggered AFTER the listed slide index (1-based).
     // Users can use arrow nav to page back through the slides while the questions are open.
     checkpoints: [
@@ -2106,6 +2115,16 @@ S — When walking on steps, always use the handrails and plant your feet firmly
               choices: ['Yes, if a coworker shows you how', 'Yes, if it\'s an emergency', 'No — never operate equipment you\'re not qualified or licensed to operate', 'Yes, but only on day shift'],
               answer: 2,
             },
+            {
+              q: 'If a dolly train is blocking a walkway, what should you do?',
+              choices: ['Step over the connection between dollies', 'Squeeze between the dollies if there is enough room', 'Stop and wait until the dollies are moved safely', 'Climb over the closest dolly cart'],
+              answer: 2,
+            },
+            {
+              q: 'What should you do before crossing in front of an active tugger train?',
+              choices: ['Cross quickly before it reaches you', 'Wait until the entire train has cleared the area', 'Wave at the tugger and proceed', 'Cross between carts if the tugger is moving slowly'],
+              answer: 1,
+            },
           ],
       },
         ],
@@ -2135,6 +2154,26 @@ S — When walking on steps, always use the handrails and plant your feet firmly
           q: 'Which statement reflects TRIGO\'s Health & Safety philosophy?',
           choices: ['Some injuries are unavoidable', 'All injuries and occupational illnesses are preventable', 'Safety is the responsibility of management only', 'Working safely is optional after probation'],
           answer: 1,
+        },
+        {
+          q: 'Why should you never walk directly in front of a moving AGV?',
+          choices: ['It may trigger a stop, and the safety system may fail', 'AGVs only stop for Toyota employees', 'AGVs are always manually driven', 'It is acceptable if you point first'],
+          answer: 0,
+        },
+        {
+          q: 'Red kick plates and red mats should be treated as:',
+          choices: ['Approved shortcuts', 'No-walk safety device areas unless your work specifically requires entry', 'Normal walkways when production is stopped', 'Areas to stand on while waiting'],
+          answer: 1,
+        },
+        {
+          q: 'What do black and yellow striped markings commonly identify?',
+          choices: ['Break areas', 'Ramp or uneven-surface hazards', 'Approved storage areas', 'Supervisor parking zones'],
+          answer: 1,
+        },
+        {
+          q: 'What does the blue X marking identify for employees performing work tasks?',
+          choices: ['A designated safe standing zone', 'A restricted area that must never be entered', 'A place to store totes', 'A forklift-only lane'],
+          answer: 0,
         },
       ],
   },
@@ -3662,7 +3701,11 @@ function renderSlideModule(mod) {
 function renderSlideCarousel(mod) {
   const idx = state.slideIdx;
   const totalSlides = mod.slides.length;
-  const slideHtml = mod.slides[idx];
+  const postSlideVideos = Array.isArray(mod.afterSlidesVideo) ? mod.afterSlidesVideo : (mod.afterSlidesVideo ? [mod.afterSlidesVideo] : []);
+  const hasPostSlidesVideo = postSlideVideos.length > 0;
+  const totalSteps = totalSlides + (hasPostSlidesVideo ? 1 : 0);
+  const isPostSlidesVideoStep = hasPostSlidesVideo && idx === totalSlides;
+  const slideHtml = isPostSlidesVideoStep ? null : mod.slides[idx];
 
   return `
     ${renderTopHeader()}
@@ -3672,7 +3715,7 @@ function renderSlideCarousel(mod) {
         <div class="flex items-center justify-between mb-2">
           <button class="btn-ghost" onclick="navigate('dashboard')">${icon('arrowLeft', 14)} Back to Modules</button>
           <div class="text-xs uppercase tracking-widest font-bold text-slate-500">
-            Slide ${idx + 1} of ${totalSlides}
+            ${isPostSlidesVideoStep ? 'Video' : 'Slide ' + (idx + 1) + ' of ' + totalSlides}
           </div>
         </div>
         <h1 class="text-xl font-black text-slate-900">${escapeHtml(mod.title)}</h1>
@@ -3685,14 +3728,23 @@ function renderSlideCarousel(mod) {
       </button>
       <div class="slide-fs-nav">
         <button onclick="slideStep(-1)" ${idx === 0 ? 'disabled' : ''}>${icon('chevronLeft', 12)} Prev</button>
-        <span class="slide-fs-counter">${idx + 1} / ${totalSlides}</span>
-        <button onclick="slideStep(1)" ${idx === totalSlides - 1 ? 'disabled' : ''}>Next ${icon('chevronRight', 12)}</button>
+        <span class="slide-fs-counter">${isPostSlidesVideoStep ? 'Video' : (idx + 1)} / ${totalSteps}</span>
+        <button onclick="slideStep(1)" ${idx === totalSteps - 1 ? 'disabled' : ''}>Next ${icon('chevronRight', 12)}</button>
       </div>
       <div class="bg-white p-4 rounded-sm border mb-4 slide-image-wrap">
-        <img class="slide-img" src="${slideHtml}" alt="Slide ${idx + 1}">
-        <button class="slide-fullscreen-toggle" onclick="enterSlideFullscreen()" title="Fullscreen (F)">
-          ${icon('maximize', 14)} Fullscreen
-        </button>
+        ${isPostSlidesVideoStep ? `
+          <div class="p-4" data-post-slide-video-wrap>
+            <div class="text-xs uppercase tracking-widest font-bold text-navy mb-3">Module 9 Safety Hazards Video</div>
+            <video controls playsinline preload="metadata" style="width:100%; max-height:70vh; border-radius:4px; background:#000;" onerror="this.closest('[data-post-slide-video-wrap]').innerHTML='<div class=&quot;module-intro-empty&quot;><div class=&quot;text-sm font-bold mb-1&quot;>Module 9 video not found.</div><div class=&quot;text-xs&quot;>Upload the video to assets/videos/module9/module9-after-slides.mp4, then refresh this page.</div></div>'">
+              ${postSlideVideos.map(src => `<source src="${escapeAttr(src)}" type="video/mp4">`).join('')}
+            </video>
+          </div>
+        ` : `
+          <img class="slide-img" src="${slideHtml}" alt="Slide ${idx + 1}">
+          <button class="slide-fullscreen-toggle" onclick="enterSlideFullscreen()" title="Fullscreen (F)">
+            ${icon('maximize', 14)} Fullscreen
+          </button>
+        `}
       </div>
 
       <div class="flex items-center justify-between gap-3 mb-4">
@@ -3709,7 +3761,7 @@ function renderSlideCarousel(mod) {
             </button>
           </div>` : ''}
 
-        ${idx < totalSlides - 1
+        ${idx < totalSteps - 1
           ? `<button class="btn-primary" onclick="slideStep(1)">Next ${icon('chevronRight', 14)}</button>`
           : (state.reviewingFromCheck
               ? `<button class="btn-primary" onclick="returnFromReview()">Back to Questions ${icon('chevronRight', 14)}</button>`
@@ -3720,6 +3772,7 @@ function renderSlideCarousel(mod) {
         ${mod.slides.map((_, i) => `
           <button class="slide-dot ${i === idx ? 'active' : ''}" onclick="setSlide(${i})" aria-label="Go to slide ${i+1}"></button>
         `).join('')}
+        ${hasPostSlidesVideo ? `<button class="slide-dot ${isPostSlidesVideoStep ? 'active' : ''}" onclick="setSlide(${totalSlides})" aria-label="Go to Module 9 video"></button>` : ''}
       </div>
     </div>
   `;
@@ -3733,7 +3786,9 @@ function setSlide(i) {
 
 function slideStep(delta) {
   const mod = getModule(state.activeModuleId);
-  const newIdx = Math.max(0, Math.min(mod.slides.length - 1, state.slideIdx + delta));
+  const postSlideVideos = Array.isArray(mod.afterSlidesVideo) ? mod.afterSlidesVideo : (mod.afterSlidesVideo ? [mod.afterSlidesVideo] : []);
+  const maxIdx = mod.slides.length - 1 + (postSlideVideos.length > 0 ? 1 : 0);
+  const newIdx = Math.max(0, Math.min(maxIdx, state.slideIdx + delta));
   setState({ slideIdx: newIdx });
   maybeFireCheckpoint();
 }
