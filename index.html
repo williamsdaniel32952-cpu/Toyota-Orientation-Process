@@ -1638,12 +1638,11 @@ S — When walking on steps, always use the handrails and plant your feet firmly
        auto-loads. Empty body intentionally — heading + video only.
        ---------------------------------------------------------------- */
     sections: [
+      { heading: 'Data Sheets — Video 1', body: `` },
+      { heading: 'Data Sheets — Video 2', body: `` },
       { heading: 'Sign In Log', body: `` },
       { heading: 'Inspector Self Audits', body: `` },
       { heading: 'WIS Signature Sheets', body: `` },
-      { heading: 'Blind Tally Sheets', body: `` },
-      { heading: 'Data Sheets — Video 1', body: `` },
-      { heading: 'Data Sheets — Video 2', body: `` },
     ],
     /* ----------------------------------------------------------------
        CHECKPOINTS — mid-module quizzes that appear AFTER the listed
@@ -1652,7 +1651,7 @@ S — When walking on steps, always use the handrails and plant your feet firmly
        ---------------------------------------------------------------- */
     checkpoints: [
       {
-        afterSection: 1,
+        afterSection: 3,
         title: 'Sign In Log Checkpoint',
         quiz: [
           {
@@ -1688,7 +1687,7 @@ S — When walking on steps, always use the handrails and plant your feet firmly
         ],
       },
       {
-        afterSection: 2,
+        afterSection: 4,
         title: 'Inspector Self Audits Checkpoint',
         quiz: [
           {
@@ -1724,7 +1723,7 @@ S — When walking on steps, always use the handrails and plant your feet firmly
         ],
       },
       {
-        afterSection: 3,
+        afterSection: 5,
         title: 'WIS Signature Sheets Checkpoint',
         quiz: [
           {
@@ -1750,33 +1749,7 @@ S — When walking on steps, always use the handrails and plant your feet firmly
         ],
       },
       {
-        afterSection: 4,
-        title: 'Blind Tally Sheets Checkpoint',
-        quiz: [
-          {
-            q: 'What is the main purpose of blind tally tracking?',
-            choices: [
-              'To replace the data sheet',
-              'To ensure accurate reporting and prevent data manipulation during containment operations',
-              'To shorten the inspection time',
-              'To record breaks taken',
-            ],
-            answer: 1,
-          },
-          {
-            q: 'What is recorded in the main table of the Blind Tally Sheet?',
-            choices: [
-              'Inspector personal contact details',
-              'Customer billing information',
-              'Kanban numbers and production counts throughout the shift',
-              'Shift meal preferences',
-            ],
-            answer: 2,
-          },
-        ],
-      },
-      {
-        afterSection: 5,
+        afterSection: 2,
         title: 'Data Sheets Checkpoint',
         quiz: [
           {
@@ -1841,16 +1814,6 @@ S — When walking on steps, always use the handrails and plant your feet firmly
         q: 'Which section of the Inspector Self Audit verifies that work instructions, setup sheets, labels, revision levels, and process controls are correct and available?',
         choices: ['Safety', 'Sort Requirements', '5S', 'None of the above'],
         answer: 1,
-      },
-      {
-        q: 'What three things does the Blind Tally Sheet support?',
-        choices: [
-          'Traceability, customer reporting, and operational accountability',
-          'Lunch, breaks, and overtime',
-          'Hiring, training, and termination',
-          'Sales, marketing, and HR',
-        ],
-        answer: 0,
       },
       {
         q: 'What can missing information on the SOR/Rework Data Sheet create?',
@@ -2511,8 +2474,9 @@ function render() {
     case 'admin-records':    html = renderAdminRecords(); break;
     case 'admin-questions':  html = renderAdminQuestionsList(); break;
     case 'admin-question-edit': html = renderAdminQuestionsEdit(); break;
-    case 'admin-videos':     html = renderAdminVideos(); break;
-    case 'admin-video-assign': html = renderAdminVideoAssign(); break;
+    case 'admin-access':     html = renderAdminAccess(); break;
+    case 'admin-videos':     html = renderAdminRecords(); break;
+    case 'admin-video-assign': html = renderAdminRecords(); break;
     default:                 html = '<div class="p-8">Loading…</div>';
   }
   root.innerHTML = html + renderWelcomeVideoModal();
@@ -3237,24 +3201,8 @@ function renderSlideSupportImage(moduleId, sectionIdx) {
 }
 
 function renderAdminImageControls(moduleId, sectionIdx) {
-  if (!isAdminPreviewUser()) return '';
-  const key = `${moduleId}::${sectionIdx}`;
-  const img = getSectionImage(moduleId, sectionIdx);
-  return `
-    <div class="admin-image-toolbar">
-      <div>
-        <div class="text-xs uppercase tracking-widest font-bold" style="color:#92400e;">Administrator Image Control</div>
-        <div class="text-xs text-slate-600">${img ? 'Current image: ' + escapeHtml(img.fileName) : 'Add an optional image above this text section.'}</div>
-      </div>
-      <div class="flex gap-2">
-        <button class="btn-ghost" onclick="document.getElementById('section-img-${escapeAttr(moduleId)}-${sectionIdx}').click()">
-          ${img ? 'Replace Image' : 'Add Image'}
-        </button>
-        ${img ? `<button class="btn-danger" onclick="removeSectionImage('${escapeAttr(key)}')">Remove</button>` : ''}
-        <input type="file" id="section-img-${escapeAttr(moduleId)}-${sectionIdx}" accept="image/*" style="display:none" onchange="handleSectionImageUpload('${escapeAttr(key)}', this.files[0])">
-      </div>
-    </div>
-  `;
+  // Media upload controls are intentionally hidden. Local uploads only changed this device, not the published website.
+  return '';
 }
 
 function handleSectionImageUpload(key, file) {
@@ -3980,7 +3928,52 @@ function completeSlideModule(score) {
    ADMIN LOGIN
    ================================================================ */
 const ADMIN_PASSWORD = 'Trig0Gr0up';
+const ADMIN_ACCESS_KEY = 'trigo_orientation_admin_access_v1';
 let adminAuthenticated = false;
+let adminCurrentUser = null; // { username, role, label, fullAdmin }
+
+function loadAdminAccessUsers() {
+  try {
+    const raw = localStorage.getItem(ADMIN_ACCESS_KEY);
+    const list = raw ? JSON.parse(raw) : [];
+    return Array.isArray(list) ? list : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveAdminAccessUsers(list) {
+  try {
+    localStorage.setItem(ADMIN_ACCESS_KEY, JSON.stringify(list));
+    return true;
+  } catch (e) {
+    showToast('Could not save access list on this device.', 'error');
+    return false;
+  }
+}
+
+function adminRoleLabel(role) {
+  const labels = {
+    admin: 'Administrator',
+    hr: 'HR',
+    recruiting: 'Recruiting',
+    temp_agency: 'Temp Agency',
+    manager: 'Manager'
+  };
+  return labels[role] || 'Viewer';
+}
+
+function isFullAdmin() {
+  return !!(adminAuthenticated && adminCurrentUser && adminCurrentUser.fullAdmin);
+}
+
+function canManageAdminContent() {
+  return isFullAdmin();
+}
+
+function canViewAdminRecords() {
+  return !!adminAuthenticated;
+}
 
 function renderAdminLogin() {
   return `
@@ -3997,13 +3990,17 @@ function renderAdminLogin() {
           </div>
           <div class="p-10">
             <p class="text-sm mb-6 text-slate-600">
-              Enter the supervisor password to view employee records, edit questions, or export data.
+              Enter the administrator password, or use an access ID provided for HR, recruiting, temp agencies, or managers.
             </p>
             <form onsubmit="handleAdminLogin(event)">
               <label class="text-xs uppercase tracking-wider font-bold text-navy mb-2" style="display:block;">
+                Access ID <span class="text-slate-400" style="text-transform:none; letter-spacing:0;">(leave blank for main admin)</span>
+              </label>
+              <input type="text" name="username" autocomplete="username" autofocus style="margin-bottom:16px;" placeholder="example: hr">
+              <label class="text-xs uppercase tracking-wider font-bold text-navy mb-2" style="display:block;">
                 Password
               </label>
-              <input type="password" name="password" required autocomplete="off" autofocus style="margin-bottom:24px;">
+              <input type="password" name="password" required autocomplete="current-password" style="margin-bottom:24px;">
               <button type="submit" class="btn-primary w-full" style="padding:14px;">Sign In</button>
             </form>
           </div>
@@ -4015,17 +4012,38 @@ function renderAdminLogin() {
 
 function handleAdminLogin(event) {
   event.preventDefault();
+  const username = normalizeLoginText(event.target.username ? event.target.username.value : '');
   const password = event.target.password.value;
-  if (password === ADMIN_PASSWORD) {
+
+  // Main administrator access. Full permissions.
+  if (!username && password === ADMIN_PASSWORD) {
     adminAuthenticated = true;
+    adminCurrentUser = { username: 'admin', role: 'admin', label: 'Administrator', fullAdmin: true };
     navigate('admin-records');
-  } else {
-    showToast('Incorrect password', 'error');
+    return;
   }
+
+  // Viewer/exporter accounts created by the administrator.
+  const users = loadAdminAccessUsers();
+  const user = users.find(u => normalizeLoginText(u.username) === username);
+  if (user && user.passwordHash === simplePasswordHash(password)) {
+    adminAuthenticated = true;
+    adminCurrentUser = {
+      username: user.username,
+      role: user.role || 'viewer',
+      label: user.label || adminRoleLabel(user.role),
+      fullAdmin: false
+    };
+    navigate('admin-records');
+    return;
+  }
+
+  showToast('Incorrect access ID or password', 'error');
 }
 
 function adminLogout() {
   adminAuthenticated = false;
+  adminCurrentUser = null;
   navigate('register');
 }
 
@@ -4033,7 +4051,7 @@ function adminLogout() {
    ADMIN — Records browser
    ================================================================ */
 function renderAdminRecords() {
-  if (!adminAuthenticated) { return renderAdminLogin(); }
+  if (!canViewAdminRecords()) { return renderAdminLogin(); }
   const term = (state.adminSearchTerm || '').toLowerCase().trim();
   const fromDate = state.adminSearchFrom || '';   // YYYY-MM-DD
   const toDate = state.adminSearchTo || '';       // YYYY-MM-DD
@@ -4069,6 +4087,7 @@ function renderAdminRecords() {
     ${renderAdminHeader('records')}
 
     <div class="max-w-7xl mx-auto px-6 py-6">
+      ${!isFullAdmin() ? `<div class="bg-white p-3 rounded-sm border mb-4 text-xs text-slate-600"><strong>View/export access:</strong> You can view progress, signed documents, and export records. Editing, password resets, deletions, and admin setup are hidden.</div>` : ''}
       <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
         <div>
           <h1 class="text-2xl font-black text-slate-900 font-georgia">Employee Records</h1>
@@ -4159,11 +4178,13 @@ function renderAdminRecords() {
                     <td style="padding:12px 16px; text-align:right;">
                       <div class="inline-flex gap-1" style="flex-wrap:wrap; justify-content:flex-end;">
                         <button class="btn-ghost" style="padding:4px 10px; font-size:11px;" onclick="viewEmployeeDetail('${escapeAttr(employeeKey(e))}')">View</button>
-                        <button class="btn-ghost" style="padding:4px 10px; font-size:11px;" onclick="openEditCredentialsModal('${escapeAttr(employeeKey(e))}')" title="Fix typos in name, empNum, or DOB">${icon('edit',12)} Edit Login</button>
-                        <button class="btn-ghost" style="padding:4px 10px; font-size:11px;" onclick="resetEmployeePassword('${escapeAttr(employeeKey(e))}')" title="Require employee to create a new password">Reset Password</button>
                         <button class="btn-ghost" style="padding:4px 10px; font-size:11px;" onclick="exportSignedDocsForEmployee('${escapeAttr(employeeKey(e))}')" title="Export signed acknowledgments only">Signed Docs</button>
                         <button class="btn-ghost" style="padding:4px 10px; font-size:11px;" onclick="exportAllForEmployee('${escapeAttr(employeeKey(e))}')" title="Transcript + certificates + signed forms">All Docs</button>
-                        <button class="btn-danger" style="padding:4px 10px; font-size:11px;" onclick="confirmDeleteEmployee('${escapeAttr(employeeKey(e))}')">${icon('trash',12)}</button>
+                        ${isFullAdmin() ? `
+                          <button class="btn-ghost" style="padding:4px 10px; font-size:11px;" onclick="openEditCredentialsModal('${escapeAttr(employeeKey(e))}')" title="Fix typos in name, empNum, or DOB">${icon('edit',12)} Edit Login</button>
+                          <button class="btn-ghost" style="padding:4px 10px; font-size:11px;" onclick="resetEmployeePassword('${escapeAttr(employeeKey(e))}')" title="Require employee to create a new password">Reset Password</button>
+                          <button class="btn-danger" style="padding:4px 10px; font-size:11px;" onclick="confirmDeleteEmployee('${escapeAttr(employeeKey(e))}')">${icon('trash',12)}</button>
+                        ` : ''}
                       </div>
                     </td>
                   </tr>`;
@@ -4193,31 +4214,174 @@ function resetEmployeePassword(empKey) {
 }
 
 function renderAdminHeader(activeTab) {
+  const roleText = adminCurrentUser ? (adminCurrentUser.label || adminRoleLabel(adminCurrentUser.role)) : 'Admin';
   return `
     <header class="bg-white border-b">
       <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between flex-wrap gap-4">
         <div class="flex items-center gap-6">
           <img src="${TRIGO_LOGO_URI}" alt="TRIGO" style="height:30px;">
-          <div class="text-xs uppercase tracking-widest font-bold text-navy">Admin Console</div>
+          <div>
+            <div class="text-xs uppercase tracking-widest font-bold text-navy">Admin Console</div>
+            <div class="text-xs text-slate-500 mt-1">Signed in as ${escapeHtml(roleText)}</div>
+          </div>
         </div>
         <div class="flex gap-2 items-center">
           <button class="btn-ghost ${activeTab === 'records' ? '' : ''}" onclick="navigate('admin-records')"
             style="${activeTab === 'records' ? 'background:var(--navy-bg); color:var(--navy); border-color:var(--navy);' : ''}">
             ${icon('users', 14)} Records
           </button>
-          <button class="btn-ghost ${activeTab === 'questions' ? '' : ''}" onclick="navigate('admin-questions')"
-            style="${activeTab === 'questions' ? 'background:var(--navy-bg); color:var(--navy); border-color:var(--navy);' : ''}">
-            ${icon('edit', 14)} Edit Questions
-          </button>
-          <button class="btn-ghost ${activeTab === 'videos' ? '' : ''}" onclick="navigate('admin-videos')"
-            style="${activeTab === 'videos' ? 'background:var(--navy-bg); color:var(--navy); border-color:var(--navy);' : ''}">
-            ${icon('bookOpen', 14)} Videos
-          </button>
+          ${canManageAdminContent() ? `
+            <button class="btn-ghost ${activeTab === 'access' ? '' : ''}" onclick="navigate('admin-access')"
+              style="${activeTab === 'access' ? 'background:var(--navy-bg); color:var(--navy); border-color:var(--navy);' : ''}">
+              ${icon('lock', 14)} Access
+            </button>
+            <button class="btn-ghost ${activeTab === 'questions' ? '' : ''}" onclick="navigate('admin-questions')"
+              style="${activeTab === 'questions' ? 'background:var(--navy-bg); color:var(--navy); border-color:var(--navy);' : ''}">
+              ${icon('edit', 14)} Edit Questions
+            </button>
+          ` : ''}
           <button class="btn-ghost" onclick="adminLogout()">Sign Out</button>
         </div>
       </div>
     </header>
   `;
+}
+
+
+/* ================================================================
+   ADMIN — Access management for HR, Recruiting, Temp Agencies, Managers
+   ================================================================ */
+function renderAdminAccess() {
+  if (!adminAuthenticated) return renderAdminLogin();
+  if (!canManageAdminContent()) return renderAdminRecords();
+  const users = loadAdminAccessUsers().sort((a,b) => (a.role || '').localeCompare(b.role || '') || (a.username || '').localeCompare(b.username || ''));
+  return `
+    ${renderAdminHeader('access')}
+    <div class="max-w-5xl mx-auto px-6 py-6">
+      <div class="mb-6">
+        <h1 class="text-2xl font-black text-slate-900 font-georgia">Access Management</h1>
+        <p class="text-xs text-slate-500 mt-1">Create view/export logins for HR, recruiting, temp agencies, and managers.</p>
+      </div>
+
+      <div class="bg-white p-5 rounded-sm border mb-6">
+        <h2 class="text-sm font-bold text-slate-900 mb-3">Add Access Login</h2>
+        <form onsubmit="handleAddAccessUser(event)" class="grid" style="grid-template-columns:1.2fr 1fr 1fr 1fr auto; gap:12px; align-items:end;">
+          <div>
+            <label class="text-xs uppercase tracking-wider font-bold text-slate-500 mb-1" style="display:block;">Access ID</label>
+            <input type="text" name="username" required placeholder="hr, recruiting, agency1">
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-wider font-bold text-slate-500 mb-1" style="display:block;">Group</label>
+            <select name="role" required>
+              <option value="hr">HR</option>
+              <option value="recruiting">Recruiting</option>
+              <option value="temp_agency">Temp Agency</option>
+              <option value="manager">Manager</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-wider font-bold text-slate-500 mb-1" style="display:block;">Display Name</label>
+            <input type="text" name="label" placeholder="HR Team">
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-wider font-bold text-slate-500 mb-1" style="display:block;">Password</label>
+            <input type="password" name="password" required autocomplete="new-password">
+          </div>
+          <button class="btn-primary" type="submit">Add</button>
+        </form>
+        <div class="text-xs text-slate-500 mt-3">
+          These accounts can view progress, view signed documents/forms, and export records. They cannot edit questions, reset employee passwords, delete records, or manage other access logins.
+        </div>
+      </div>
+
+      <div class="bg-white rounded-sm border overflow-hidden">
+        ${users.length === 0 ? `
+          <div class="p-8 text-center text-sm text-slate-500">No additional access logins have been created yet.</div>
+        ` : `
+          <table style="width:100%; border-collapse:collapse;">
+            <thead style="background:var(--slate-100); font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--slate-500);">
+              <tr>
+                <th style="text-align:left; padding:12px 16px; font-weight:700;">Access ID</th>
+                <th style="text-align:left; padding:12px 16px; font-weight:700;">Group</th>
+                <th style="text-align:left; padding:12px 16px; font-weight:700;">Display Name</th>
+                <th style="text-align:left; padding:12px 16px; font-weight:700;">Created</th>
+                <th style="text-align:right; padding:12px 16px; font-weight:700;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${users.map(u => `
+                <tr style="border-top:1px solid var(--slate-200);">
+                  <td style="padding:12px 16px; font-family:Consolas,monospace; font-weight:700; color:var(--slate-900);">${escapeHtml(u.username)}</td>
+                  <td style="padding:12px 16px; color:var(--slate-700);">${escapeHtml(adminRoleLabel(u.role))}</td>
+                  <td style="padding:12px 16px; color:var(--slate-700);">${escapeHtml(u.label || adminRoleLabel(u.role))}</td>
+                  <td style="padding:12px 16px; color:var(--slate-500); font-size:12px;">${formatDate(u.createdAt)}</td>
+                  <td style="padding:12px 16px; text-align:right;">
+                    <button class="btn-ghost" style="padding:4px 10px; font-size:11px;" onclick="resetAccessPassword('${escapeAttr(u.username)}')">Reset Password</button>
+                    <button class="btn-danger" style="padding:4px 10px; font-size:11px;" onclick="deleteAccessUser('${escapeAttr(u.username)}')">${icon('trash',12)}</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `}
+      </div>
+    </div>
+  `;
+}
+
+function handleAddAccessUser(event) {
+  event.preventDefault();
+  const form = event.target;
+  const username = normalizeLoginText(form.username.value);
+  const role = form.role.value;
+  const label = (form.label.value || adminRoleLabel(role)).trim();
+  const password = form.password.value;
+  if (!username || !password) {
+    showToast('Access ID and password are required.', 'error');
+    return;
+  }
+  if (username === 'admin') {
+    showToast('Please choose an Access ID other than admin.', 'error');
+    return;
+  }
+  const users = loadAdminAccessUsers();
+  if (users.some(u => normalizeLoginText(u.username) === username)) {
+    showToast('That Access ID already exists.', 'error');
+    return;
+  }
+  users.push({ username, role, label, passwordHash: simplePasswordHash(password), createdAt: new Date().toISOString() });
+  if (saveAdminAccessUsers(users)) {
+    showToast('Access login added.', 'success');
+    form.reset();
+    render();
+  }
+}
+
+function resetAccessPassword(username) {
+  const newPass = prompt('Enter the new password for ' + username + ':');
+  if (newPass === null) return;
+  if (!newPass.trim()) {
+    showToast('Password cannot be blank.', 'error');
+    return;
+  }
+  const users = loadAdminAccessUsers();
+  const idx = users.findIndex(u => normalizeLoginText(u.username) === normalizeLoginText(username));
+  if (idx < 0) return;
+  users[idx].passwordHash = simplePasswordHash(newPass);
+  users[idx].passwordResetAt = new Date().toISOString();
+  if (saveAdminAccessUsers(users)) {
+    showToast('Access password reset.', 'success');
+    render();
+  }
+}
+
+function deleteAccessUser(username) {
+  if (!confirm('Remove access for ' + username + '?')) return;
+  const users = loadAdminAccessUsers().filter(u => normalizeLoginText(u.username) !== normalizeLoginText(username));
+  if (saveAdminAccessUsers(users)) {
+    showToast('Access login removed.', 'success');
+    render();
+  }
 }
 
 /* ================================================================
@@ -4329,6 +4493,7 @@ function confirmDeleteEmployee(empKey) {
    ================================================================ */
 function renderAdminQuestionsList() {
   if (!adminAuthenticated) return renderAdminLogin();
+  if (!canManageAdminContent()) return renderAdminRecords();
   const edits = loadQuestionEdits();
   const editedCount = Object.keys(edits).length;
 
@@ -4399,6 +4564,7 @@ function resetAllQuestions() {
 /* ----- Per-module question editor ----- */
 function renderAdminQuestionsEdit() {
   if (!adminAuthenticated) return renderAdminLogin();
+  if (!canManageAdminContent()) return renderAdminRecords();
   const modId = state.adminQuestionsModule;
   const baseMod = MODULES.find(m => m.id === modId);
   if (!baseMod) {
@@ -5752,6 +5918,7 @@ function exportSignedEmergency(emp) {
    ================================================================ */
 function renderAdminVideos() {
   if (!adminAuthenticated) return renderAdminLogin();
+  return renderAdminRecords();
 
   const assignments = loadVideoAssignments();
   const totalSlots = MODULES.filter(m => m.kind !== 'slides')
@@ -5896,6 +6063,7 @@ function renderVideoModuleSection(mod, assignments) {
 /* ----- "Add Video" view: shows full module breakdown for selecting a slot ----- */
 function renderAdminVideoAssign() {
   if (!adminAuthenticated) return renderAdminLogin();
+  return renderAdminRecords();
   const assignments = loadVideoAssignments();
 
   return `
