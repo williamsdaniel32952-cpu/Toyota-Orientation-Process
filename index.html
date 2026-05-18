@@ -978,6 +978,17 @@ input:focus, textarea:focus, select:focus {
   }
 }
 </style>
+
+<!-- SUPABASE CLOUD DATABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://jybvytqijpmvovtxhaxi.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5Ynl2dHFpanBtdm92dHhoYXhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMzMwOTIsImV4cCI6MjA5NDcwOTA5Mn0.GVgfSHe5s8nDUyXuKHdmExWLg9rCZBa888fNmq3BYDk';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+window.supabaseClient = supabaseClient;
+console.log('Supabase Connected');
+</script>
+
 </head>
 <body>
 
@@ -986,6 +997,10 @@ input:focus, textarea:focus, select:focus {
 <!-- ALL APPLICATION JAVASCRIPT FOLLOWS -->
 <script>
 "use strict";
+
+// Supabase is connected above as window.supabaseClient.
+// Existing localStorage code remains intact until each save/load function is safely migrated.
+
 
 /* Application code injected during build */
 
