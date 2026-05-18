@@ -4958,6 +4958,59 @@ ${employees.map((e, i) => {
   `;
 }).join('')}
 
+
+<!-- SUPABASE LOGIN GATE -->
+<script>
+async function requireSupabaseLogin() {
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9;padding:20px;">
+        <div style="background:white;padding:40px;border-radius:8px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+          <h1 style="margin:0 0 10px 0;color:#1a4a8c;font-size:28px;">TRIGO Orientation</h1>
+          <p style="margin:0 0 24px 0;color:#475569;">
+            Sign in is required to access the training system.
+          </p>
+
+          <input id="login-email" type="email" placeholder="Email Address"
+            style="width:100%;padding:12px;margin-bottom:12px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <input id="login-password" type="password" placeholder="Password"
+            style="width:100%;padding:12px;margin-bottom:18px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <button onclick="loginToOrientation()"
+            style="width:100%;padding:14px;background:#1a4a8c;color:white;border:none;border-radius:4px;font-weight:700;font-size:15px;cursor:pointer;">
+            SIGN IN
+          </button>
+
+          <div id="login-error" style="margin-top:14px;color:#dc2626;font-size:13px;"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function loginToOrientation() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await window.supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('login-error').innerText = error.message;
+    return;
+  }
+
+  location.reload();
+}
+
+requireSupabaseLogin();
+</script>
+
 </body>
 </html>`;
   win.document.write(html);
@@ -5035,6 +5088,59 @@ function openCertificatesPdf(emp, completedMods) {
   </button>
 </div>
 ${completedMods.map(certPage).join('')}
+
+<!-- SUPABASE LOGIN GATE -->
+<script>
+async function requireSupabaseLogin() {
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9;padding:20px;">
+        <div style="background:white;padding:40px;border-radius:8px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+          <h1 style="margin:0 0 10px 0;color:#1a4a8c;font-size:28px;">TRIGO Orientation</h1>
+          <p style="margin:0 0 24px 0;color:#475569;">
+            Sign in is required to access the training system.
+          </p>
+
+          <input id="login-email" type="email" placeholder="Email Address"
+            style="width:100%;padding:12px;margin-bottom:12px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <input id="login-password" type="password" placeholder="Password"
+            style="width:100%;padding:12px;margin-bottom:18px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <button onclick="loginToOrientation()"
+            style="width:100%;padding:14px;background:#1a4a8c;color:white;border:none;border-radius:4px;font-weight:700;font-size:15px;cursor:pointer;">
+            SIGN IN
+          </button>
+
+          <div id="login-error" style="margin-top:14px;color:#dc2626;font-size:13px;"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function loginToOrientation() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await window.supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('login-error').innerText = error.message;
+    return;
+  }
+
+  location.reload();
+}
+
+requireSupabaseLogin();
+</script>
+
 </body></html>`);
   win.document.close();
 }
@@ -5793,6 +5899,59 @@ function exportSignedAttendance(emp) {
   </div>
 </div>
 
+
+<!-- SUPABASE LOGIN GATE -->
+<script>
+async function requireSupabaseLogin() {
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9;padding:20px;">
+        <div style="background:white;padding:40px;border-radius:8px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+          <h1 style="margin:0 0 10px 0;color:#1a4a8c;font-size:28px;">TRIGO Orientation</h1>
+          <p style="margin:0 0 24px 0;color:#475569;">
+            Sign in is required to access the training system.
+          </p>
+
+          <input id="login-email" type="email" placeholder="Email Address"
+            style="width:100%;padding:12px;margin-bottom:12px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <input id="login-password" type="password" placeholder="Password"
+            style="width:100%;padding:12px;margin-bottom:18px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <button onclick="loginToOrientation()"
+            style="width:100%;padding:14px;background:#1a4a8c;color:white;border:none;border-radius:4px;font-weight:700;font-size:15px;cursor:pointer;">
+            SIGN IN
+          </button>
+
+          <div id="login-error" style="margin-top:14px;color:#dc2626;font-size:13px;"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function loginToOrientation() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await window.supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('login-error').innerText = error.message;
+    return;
+  }
+
+  location.reload();
+}
+
+requireSupabaseLogin();
+</script>
+
 </body></html>`);
   win.document.close();
 }
@@ -5922,6 +6081,59 @@ function exportSignedEmergency(emp) {
     </div>
   </div>
 </div>
+
+
+<!-- SUPABASE LOGIN GATE -->
+<script>
+async function requireSupabaseLogin() {
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9;padding:20px;">
+        <div style="background:white;padding:40px;border-radius:8px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+          <h1 style="margin:0 0 10px 0;color:#1a4a8c;font-size:28px;">TRIGO Orientation</h1>
+          <p style="margin:0 0 24px 0;color:#475569;">
+            Sign in is required to access the training system.
+          </p>
+
+          <input id="login-email" type="email" placeholder="Email Address"
+            style="width:100%;padding:12px;margin-bottom:12px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <input id="login-password" type="password" placeholder="Password"
+            style="width:100%;padding:12px;margin-bottom:18px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <button onclick="loginToOrientation()"
+            style="width:100%;padding:14px;background:#1a4a8c;color:white;border:none;border-radius:4px;font-weight:700;font-size:15px;cursor:pointer;">
+            SIGN IN
+          </button>
+
+          <div id="login-error" style="margin-top:14px;color:#dc2626;font-size:13px;"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function loginToOrientation() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await window.supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('login-error').innerText = error.message;
+    return;
+  }
+
+  location.reload();
+}
+
+requireSupabaseLogin();
+</script>
 
 </body></html>`);
   win.document.close();
@@ -6595,6 +6807,59 @@ ${completionHtml}
 ${certPagesHtml}
 ${diplomaHtml}
 
+
+<!-- SUPABASE LOGIN GATE -->
+<script>
+async function requireSupabaseLogin() {
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9;padding:20px;">
+        <div style="background:white;padding:40px;border-radius:8px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+          <h1 style="margin:0 0 10px 0;color:#1a4a8c;font-size:28px;">TRIGO Orientation</h1>
+          <p style="margin:0 0 24px 0;color:#475569;">
+            Sign in is required to access the training system.
+          </p>
+
+          <input id="login-email" type="email" placeholder="Email Address"
+            style="width:100%;padding:12px;margin-bottom:12px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <input id="login-password" type="password" placeholder="Password"
+            style="width:100%;padding:12px;margin-bottom:18px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <button onclick="loginToOrientation()"
+            style="width:100%;padding:14px;background:#1a4a8c;color:white;border:none;border-radius:4px;font-weight:700;font-size:15px;cursor:pointer;">
+            SIGN IN
+          </button>
+
+          <div id="login-error" style="margin-top:14px;color:#dc2626;font-size:13px;"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function loginToOrientation() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await window.supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('login-error').innerText = error.message;
+    return;
+  }
+
+  location.reload();
+}
+
+requireSupabaseLogin();
+</script>
+
 </body></html>`);
   win.document.close();
 }
@@ -6884,6 +7149,59 @@ function exportSignedDocsForEmployee(empKey) {
 ${hasA ? buildAttendanceSignedHtml(emp) : ''}
 ${hasE ? buildEmergencySignedHtml(emp) : ''}
 ${hasC ? buildCompletionSignedHtml(emp) : ''}
+
+<!-- SUPABASE LOGIN GATE -->
+<script>
+async function requireSupabaseLogin() {
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9;padding:20px;">
+        <div style="background:white;padding:40px;border-radius:8px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+          <h1 style="margin:0 0 10px 0;color:#1a4a8c;font-size:28px;">TRIGO Orientation</h1>
+          <p style="margin:0 0 24px 0;color:#475569;">
+            Sign in is required to access the training system.
+          </p>
+
+          <input id="login-email" type="email" placeholder="Email Address"
+            style="width:100%;padding:12px;margin-bottom:12px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <input id="login-password" type="password" placeholder="Password"
+            style="width:100%;padding:12px;margin-bottom:18px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <button onclick="loginToOrientation()"
+            style="width:100%;padding:14px;background:#1a4a8c;color:white;border:none;border-radius:4px;font-weight:700;font-size:15px;cursor:pointer;">
+            SIGN IN
+          </button>
+
+          <div id="login-error" style="margin-top:14px;color:#dc2626;font-size:13px;"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function loginToOrientation() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await window.supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('login-error').innerText = error.message;
+    return;
+  }
+
+  location.reload();
+}
+
+requireSupabaseLogin();
+</script>
+
 </body></html>`);
   win.document.close();
 }
@@ -7595,6 +7913,59 @@ function exportSignedCompletion(emp) {
     is the system of record for employee training completion.
   </div>
 </div>
+
+
+<!-- SUPABASE LOGIN GATE -->
+<script>
+async function requireSupabaseLogin() {
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9;padding:20px;">
+        <div style="background:white;padding:40px;border-radius:8px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+          <h1 style="margin:0 0 10px 0;color:#1a4a8c;font-size:28px;">TRIGO Orientation</h1>
+          <p style="margin:0 0 24px 0;color:#475569;">
+            Sign in is required to access the training system.
+          </p>
+
+          <input id="login-email" type="email" placeholder="Email Address"
+            style="width:100%;padding:12px;margin-bottom:12px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <input id="login-password" type="password" placeholder="Password"
+            style="width:100%;padding:12px;margin-bottom:18px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <button onclick="loginToOrientation()"
+            style="width:100%;padding:14px;background:#1a4a8c;color:white;border:none;border-radius:4px;font-weight:700;font-size:15px;cursor:pointer;">
+            SIGN IN
+          </button>
+
+          <div id="login-error" style="margin-top:14px;color:#dc2626;font-size:13px;"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function loginToOrientation() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await window.supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('login-error').innerText = error.message;
+    return;
+  }
+
+  location.reload();
+}
+
+requireSupabaseLogin();
+</script>
 
 </body></html>`);
   win.document.close();
@@ -8632,5 +9003,58 @@ document.addEventListener('keydown', (e) => {
 
 
 </script>
+
+<!-- SUPABASE LOGIN GATE -->
+<script>
+async function requireSupabaseLogin() {
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9;padding:20px;">
+        <div style="background:white;padding:40px;border-radius:8px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+          <h1 style="margin:0 0 10px 0;color:#1a4a8c;font-size:28px;">TRIGO Orientation</h1>
+          <p style="margin:0 0 24px 0;color:#475569;">
+            Sign in is required to access the training system.
+          </p>
+
+          <input id="login-email" type="email" placeholder="Email Address"
+            style="width:100%;padding:12px;margin-bottom:12px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <input id="login-password" type="password" placeholder="Password"
+            style="width:100%;padding:12px;margin-bottom:18px;border:2px solid #cbd5e1;border-radius:4px;font-size:16px;">
+
+          <button onclick="loginToOrientation()"
+            style="width:100%;padding:14px;background:#1a4a8c;color:white;border:none;border-radius:4px;font-weight:700;font-size:15px;cursor:pointer;">
+            SIGN IN
+          </button>
+
+          <div id="login-error" style="margin-top:14px;color:#dc2626;font-size:13px;"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function loginToOrientation() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await window.supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('login-error').innerText = error.message;
+    return;
+  }
+
+  location.reload();
+}
+
+requireSupabaseLogin();
+</script>
+
 </body>
 </html>
