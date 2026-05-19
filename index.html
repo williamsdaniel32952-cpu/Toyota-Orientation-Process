@@ -989,6 +989,7 @@ window.supabaseClient = supabaseClient;
 console.log('Supabase Connected');
 </script>
 
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head>
 <body>
 
@@ -1478,69 +1479,188 @@ S — Stairs: use handrails`,
     num: 6,
     title: 'Safety Processes',
     icon: 'shieldAlert',
-    estMin: 10,
+    estMin: 20,
     sections: [
       {
-        heading: 'Safety Hazards Video',
-        body: `Watch the Safety Hazards video carefully. This module now focuses only on the video content and key plant-floor hazards. The safety module introduction video will still load from the Git repository if uploaded at assets/videos/module6/module6-intro.mp4.
+        heading: 'Shelter-in-Place',
+        body: `Have a plan for where you will go in the event of an emergency.
 
-Upload the Safety Hazards video to:
-assets/videos/module6/module6-section1.mp4
+The Emergency Tone is "Shelter on Solid" — a continuous solid tone (no pulsing). When you hear it:
+• Immediately seek shelter.
+• Do NOT return to your work area until the All Clear has been announced.
 
-Because these videos are loaded from the Git repository, they will be visible from any approved device after deployment.`,
+Shelter locations are mapped across TMMMS by zone (Press Shop, Bodyweld Shop, Paint Shop, Assembly Shop). Memorize the closest shelter point for your assigned area. Color-coded shelter zones include: Grey (Press Shop areas), Yellow (Bodyweld), Red (Bodyweld PPC / E0 Locker Room), Blue (Paint Shop areas), Green (Bodyweld restrooms), and Purple (Utilities areas).`,
       },
+      {
+        heading: 'Severe Weather (tornado, severe thunderstorm)',
+        body: `In the event of a tornado or other severe weather emergency, an alarm will sound followed by directions to proceed to the Severe Weather Shelter Area.
+
+If the severe weather alarm activates:
+• Remain calm. Proceed to the Severe Weather Shelter Area; look for designated signs.
+• If you are able, help other team members and visitors get to the shelter area.
+• Enter completely into the shelter area. It will be crowded — respect space.
+• Stay away from the perimeter of the building. DO NOT go outside or near windows or doorways leading outside for any reason.
+• Do not exit the Severe Weather Area until "All Clear" is given by Security.
+
+Watch vs. Warning (National Weather Service):
+• WATCH = conditions are favorable but not occurring or imminent. Be ready to act.
+• WARNING = conditions are occurring or imminent. Tornado warning means a tornado has been sighted or indicated by radar — imminent danger to life and property.`,
+      },
+      {
+        heading: 'Accountability Officer Role',
+        body: `If designated as the Accountability Officer for your shelter location:
+1. Open the box and note the box #.
+2. Put on the Accountability Officer vest.
+3. Turn radio to channel 1 (Sec & Fire Common).
+4. Press "Talk" and announce: "Shelter # [box #] to Dispatch, [your name] has established Shelter # [box #] command."
+5. Begin accountability by counting everyone in the shelter. Remember to add anyone from the opposite side of restrooms (men's/women's) or other access points.
+6. Wait for Security to call for the report. Monitor the radio.
+7. Use the QR code to scan with smartphone, select "Open proofpoint.com," and complete and submit the Shelter Report (location, AO name, head count).
+8. Track Additional People — contractors, visitors, vendors, suppliers, drivers — separately.`,
+      },
+      {
+        heading: 'Andon Process — Stop / Wait / Call for Help',
+        body: `The physical Andon inside TMMMS on the assembly line is the WHITE rope that runs overhead parallel with the assembly lines. There is also a RED rope — this is the Line Stop. Do NOT pull the red rope unless there is an emergency such as a serious safety concern.
+
+When to use the Andon (online — to notify the TMMMS Assembly Team Leader / let your Lead Hand know on radio):
+1. Unable to inspect or rework a vehicle because you are behind in process or the TM is in your way.
+2. You need to go to the rest room or leave the line and cannot contact your Lead.
+3. Over 10% fallout (NG) on the project.
+4. Safety concern or ergo issue.
+5. Unable to document an N/G vehicle on the No. 1 sheet.
+6. You accidentally damaged a vehicle or part — notify Lead Hand immediately.
+7. A bolt or mating part gets stuck in a vehicle while using it — notify LH immediately.
+8. You drop your calibrated measuring tool — notify LH immediately.
+9. You drop a part — notify LH immediately.
+10. Anyone other than an RI Group Leader or your Lead Hand asks you to change your sort method — notify LH immediately.
+11. Parts or vehicles are missed online — notify LH immediately; LH will also notify RI TM to help contain missed parts/vehicles when necessary.
+
+Always document on the data sheet when you escalate to a Lead Hand: what you told them and who, so it can be traced. Record this in the comment section of the data sheet (e.g., "Have large amount of defects over 10%, notified LH, LH notified Joe Doe RI."). When a sequence number is available, include it in the comment section.`,
+      },
+      {
+        heading: 'Lead Hand responsibilities when pulling the Andon',
+        body: `1. When setting up a sort and altering a part in any way — escalate to Site Supervisor or Program Manager.
+2. When setting up a sort and doing any install or rework with a hammer or anything that could damage the part — escalate to SS or PM.
+3. When setting up a sort that deviates from TRIGO best practices — notify SS or PM.
+4. If a chemical is being used, ensure approval from QE and/or supplier that it will not damage the part (e.g., alcohol may discolor a weather strip — may need lemon juice instead).
+5. Any safety concerns must be escalated.
+6. When sort is initiated and the line needs parts ASAP, all inspection steps must still be followed. If conveyance or anyone takes parts not inspected/stickered/marked per WIS, notify LH immediately.
+7. When taking a call to set up a sort, be efficient — bring all necessary tools, markers, stickers needed when responding.
+8. When sort is set up to NOT mark parts, escalate to SS or PM if possible — parts need to be marked for traceability in case of question later.`,
+      },
+      {
+        heading: 'Walking & Plant Safety — CHIPS',
+        body: `C — Don't operate cell phones while walking. Walking with a cell phone is almost equivalent to walking with your eyes closed.
+H — Keep your hands out of your pockets. Center of gravity and balance decrease when walking with hands in pockets; if you slip, you cannot break your fall.
+I — Cross at designated intersections. This minimizes interaction with mobile equipment. There have been incidents where Team Members were struck by mobile equipment because they were not in a designated pedestrian aisle or intersection.
+P — Point and call at all intersections. Communication between pedestrians and mobile equipment operators prevents serious accidents.
+S — When walking on steps, always use the handrails and plant your feet firmly on each step. Affiliates have had significant injuries from falls on stairs.`,
+      },
+      {
+        heading: 'Door opening procedure',
+        body: `When opening a car door, assume the proper stance. If on the right-hand side of the car, place your LEFT hand behind your back and open the door with your RIGHT hand. You will be facing the rear of the car. Grip the handle with a firm but gentle, closed palm — this gives you the most control and avoids ergonomic strain.`,
+      },
+      {
+        heading: 'Safety Hazards Video',
+        body: `Watch the Safety Hazards video. This video reviews plant-floor hazards such as tugger trains, AGVs, red kick plates, uneven surfaces, restricted areas, dolly trains, and safe standing zones.`,
+      }
     ],
     quiz: [
       {
-        q: 'A dolly train is blocking your walkway. What should you do?',
+        q: 'What does the Emergency Tone "Shelter on Solid" mean?',
+        choices: [
+          'A drill — keep working',
+          'Immediately seek shelter; do NOT return until All Clear is announced',
+          'Lunch is ready',
+          'Line stop only',
+        ],
+        answer: 1,
+      },
+      {
+        q: 'Which Andon rope should you NEVER pull unless there is a serious emergency?',
+        choices: ['White rope (overhead Andon)', 'Red rope (Line Stop)', 'Blue rope', 'Yellow rope'],
+        answer: 1,
+      },
+      {
+        q: 'A dolly train is blocking your walkway. What do you do?',
         choices: [
           'Climb over carefully',
           'Crawl underneath',
-          'Wait for the dollies to be moved — never cross over',
+          'WAIT for the dollies to be moved — never cross over',
           'Push the dollies aside',
         ],
         answer: 2,
       },
       {
-        q: 'What should you do when you see a red kick plate on the floor?',
+        q: 'What is the difference between a tornado WATCH and a tornado WARNING?',
         choices: [
-          'Step on it to test it',
-          'Avoid stepping on it because it is pressure-sensitive and can stop the line',
-          'Use it as a foot rest',
+          'There is no difference',
+          'Watch = conditions favorable but not occurring; Warning = tornado sighted/indicated, imminent danger',
+          'Watch is at night, Warning is during the day',
+          'Watch means stay outside, Warning means go in',
+        ],
+        answer: 1,
+      },
+      {
+        q: 'You see a RED kick plate on the floor. What do you do?',
+        choices: [
+          'Step on it — it is a foot rest',
+          'Do NOT step on it — it is pressure-sensitive and will stop the line',
+          'Kick it to test it',
           'Cover it with cardboard',
         ],
         answer: 1,
       },
       {
-        q: 'What do orange AGV paths indicate?',
+        q: 'You experience over 10% fallout (NG) on a project. What do you do?',
         choices: [
-          'A safe walking shortcut',
-          'A designated path for Automated Guided Vehicles that pedestrians must not block',
-          'A break area',
-          'A place to store totes',
+          'Keep going, it is normal',
+          'Use the Andon to notify your Lead Hand and document the escalation',
+          'Take a break',
+          'Throw away the bad parts quietly',
         ],
         answer: 1,
       },
       {
-        q: 'What should employees do at intersections and pedestrian crossings?',
+        q: 'When opening a car door on the RIGHT-hand side of a vehicle, what is the proper stance?',
         choices: [
-          'Keep walking quickly without stopping',
-          'Use stop, look, and point/call practices before crossing',
-          'Cross anywhere if no vehicle is visible',
-          'Follow another person without checking',
+          'Use both hands and pull hard',
+          'Place LEFT hand behind your back, open with RIGHT hand, facing the rear of the car',
+          'Open with your foot',
+          'Grip handle with fingertips only',
         ],
         answer: 1,
       },
       {
-        q: 'What should you do before sorting in an area that uses retractable barriers?',
+        q: 'What should you do before crossing where tugger trains or dolly trains are moving?',
         choices: [
-          'Move the barrier out of the way',
-          'Make sure the barrier is placed and secure before sorting',
-          'Ignore the barrier if production is slow',
-          'Step over the barrier when needed',
+          'Cross quickly if you think you have time',
+          'Wait until the entire train has cleared the walkway',
+          'Step between the carts if they are moving slowly',
+          'Climb over the dolly connection',
         ],
         answer: 1,
       },
+      {
+        q: 'Why should you never walk directly in front of a moving AGV?',
+        choices: [
+          'It may trigger a stop, and the safety system may fail',
+          'AGVs only stop for Toyota employees',
+          'AGVs are always manually driven',
+          'It is allowed if production is stopped',
+        ],
+        answer: 0,
+      },
+      {
+        q: 'What do black and yellow striped markings commonly identify?',
+        choices: [
+          'Break areas',
+          'Ramp or uneven-surface hazards',
+          'Approved storage areas',
+          'Supervisor parking zones',
+        ],
+        answer: 1,
+      }
     ],
   },
   {
@@ -1891,171 +2011,7 @@ Because these videos are loaded from the Git repository, they will be visible fr
       },
     ],
   },
-  {
-    id: 'safety-awareness',
-    num: 9,
-    title: 'Health & Safety Awareness Training',
-    icon: 'alertTriangle',
-    estMin: 20,
-    kind: 'slides',
-    slides: SAFETY_SLIDES,
-    // Optional video shown after the final slide and before the final exam.
-    // Place the MP4 in the Git repo at:
-    //   assets/videos/module9/module9-after-slides.mp4
-    // Fallback names are also checked to make uploading easier.
-    afterSlidesVideo: [
-      'assets/videos/module9/module9-after-slides.mp4',
-      'assets/videos/module9/module9-video.mp4',
-      'assets/videos/module9/module9.mp4',
-    ],
-    // Checkpoints: 2 questions each, triggered AFTER the listed slide index (1-based).
-    // Users can use arrow nav to page back through the slides while the questions are open.
-    checkpoints: [
-      {
-        afterSlide: 5,
-        title: 'Quick Check 1',
-        coversSlides: '1-5',
-        quiz: [
-            {
-              q: 'OSHA laws apply to which of the following?',
-              choices: ['Only the employer', 'Only the supervisor', 'The employer, the supervisor, and the worker', 'Only OSHA inspectors'],
-              answer: 2,
-            },
-            {
-              q: 'TRIGO\'s stance on workplace violence is best described as:',
-              choices: ['Handled case by case', 'Zero tolerance', 'Tolerated if no injury occurs', 'Only addressed if reported in writing'],
-              answer: 1,
-            },
-          ],
-      },
-      {
-        afterSlide: 9,
-        title: 'Quick Check 2',
-        coversSlides: '6-9',
-        quiz: [
-            {
-              q: 'If an employee believes they were fired or demoted for using their OSHA rights, how many days do they have to file a complaint with OSHA?',
-              choices: ['7 days', '15 days', '30 days', '90 days'],
-              answer: 2,
-            },
-            {
-              q: 'Within how many hours must the employer notify OSHA of a workplace fatality or the hospitalization of three or more workers?',
-              choices: ['1 hour', '8 hours', '24 hours', '72 hours'],
-              answer: 1,
-            },
-          ],
-      },
-      {
-        afterSlide: 13,
-        title: 'Quick Check 3',
-        coversSlides: '10-13',
-        quiz: [
-            {
-              q: 'How often does the Joint Health & Safety US Committee (JHSC) hold its meetings?',
-              choices: ['Weekly', 'Monthly', 'Quarterly', 'Annually'],
-              answer: 2,
-            },
-            {
-              q: 'What does "latency" mean in the context of occupational illness?',
-              choices: ['How long an employee can work without a break', 'The period between exposure to a hazard and the appearance of illness', 'The time it takes OSHA to respond to a complaint', 'How long PPE is rated to last'],
-              answer: 1,
-            },
-          ],
-      },
-      {
-        afterSlide: 19,
-        title: 'Quick Check 4',
-        coversSlides: '14-19',
-        quiz: [
-            {
-              q: 'OSHA inspections are conducted:',
-              choices: ['Only after written notice 30 days in advance', 'Only by appointment with the employer', 'Without advance notice', 'Only when the employee union requests it'],
-              answer: 2,
-            },
-            {
-              q: 'Which of the following is one of the 3 Key Rights all employees have?',
-              choices: ['Right to Overtime', 'Right to Refuse unsafe work', 'Right to Promotion', 'Right to Schedule Changes'],
-              answer: 1,
-            },
-          ],
-      },
-      {
-        afterSlide: 24,
-        title: 'Quick Check 5',
-        coversSlides: '20-24',
-        quiz: [
-            {
-              q: 'According to the Health & Safety Performance Expectations, when should you report unsafe acts, conditions, hazards, or near-miss incidents?',
-              choices: ['At the next safety meeting', 'By end of shift', 'Immediately to your supervisor or client representative', 'Only if someone gets hurt'],
-              answer: 2,
-            },
-            {
-              q: 'Should you operate machinery or equipment that you are not qualified or licensed to operate?',
-              choices: ['Yes, if a coworker shows you how', 'Yes, if it\'s an emergency', 'No — never operate equipment you\'re not qualified or licensed to operate', 'Yes, but only on day shift'],
-              answer: 2,
-            },
-            {
-              q: 'If a dolly train is blocking a walkway, what should you do?',
-              choices: ['Step over the connection between dollies', 'Squeeze between the dollies if there is enough room', 'Stop and wait until the dollies are moved safely', 'Climb over the closest dolly cart'],
-              answer: 2,
-            },
-            {
-              q: 'What should you do before crossing in front of an active tugger train?',
-              choices: ['Cross quickly before it reaches you', 'Wait until the entire train has cleared the area', 'Wave at the tugger and proceed', 'Cross between carts if the tugger is moving slowly'],
-              answer: 1,
-            },
-          ],
-      },
-        ],
-    // Final exam — 5 questions, after slide 27 (the closing slide).
-    finalQuiz: [
-        {
-          q: 'An injured employee should report the injury to their supervisor or customer:',
-          choices: ['At the end of the shift', 'Immediately', 'Within 24 hours', 'Only if medical attention is needed'],
-          answer: 1,
-        },
-        {
-          q: 'Which document gives the treating physician permission to conduct the post-accident drug and alcohol test?',
-          choices: ['F 5.4 Accident/Incident Report', 'F 5.7 Physical Abilities Form', 'The ePassport form', 'F 5.16 Early and Safe Return to Work memo'],
-          answer: 2,
-        },
-        {
-          q: 'After a work-related injury where a drug and alcohol test is required, when can the employee return to work?',
-          choices: ['Immediately after the test is administered', 'After their next scheduled shift', 'Once the test results have been received', 'Whenever the supervisor approves'],
-          answer: 2,
-        },
-        {
-          q: 'The supervisor/manager must forward the completed accident/incident report to ussafety@trigo-group.com within how many hours of the accident?',
-          choices: ['8 hours', '24 hours', '48 hours', '72 hours'],
-          answer: 1,
-        },
-        {
-          q: 'Which statement reflects TRIGO\'s Health & Safety philosophy?',
-          choices: ['Some injuries are unavoidable', 'All injuries and occupational illnesses are preventable', 'Safety is the responsibility of management only', 'Working safely is optional after probation'],
-          answer: 1,
-        },
-        {
-          q: 'Why should you never walk directly in front of a moving AGV?',
-          choices: ['It may trigger a stop, and the safety system may fail', 'AGVs only stop for Toyota employees', 'AGVs are always manually driven', 'It is acceptable if you point first'],
-          answer: 0,
-        },
-        {
-          q: 'Red kick plates and red mats should be treated as:',
-          choices: ['Approved shortcuts', 'No-walk safety device areas unless your work specifically requires entry', 'Normal walkways when production is stopped', 'Areas to stand on while waiting'],
-          answer: 1,
-        },
-        {
-          q: 'What do black and yellow striped markings commonly identify?',
-          choices: ['Break areas', 'Ramp or uneven-surface hazards', 'Approved storage areas', 'Supervisor parking zones'],
-          answer: 1,
-        },
-        {
-          q: 'What does the blue X marking identify for employees performing work tasks?',
-          choices: ['A designated safe standing zone', 'A restricted area that must never be entered', 'A place to store totes', 'A forklift-only lane'],
-          answer: 0,
-        },
-      ],
-  },
+  
 ];
 
 const TOTAL_MODULES = MODULES.length;
@@ -2995,8 +2951,11 @@ function renderModuleListItem(mod, emp) {
 
   let subItems;
   if (mod.kind === 'slides') {
-    subItems = [{ label: `Slides 1–${mod.slides.length}` }]
-      .concat(mod.checkpoints.map(cp => ({ label: `${cp.title} (after slide ${cp.afterSlide})` })))
+    const hasPostSlidesVideo = !!(Array.isArray(mod.afterSlidesVideo) ? mod.afterSlidesVideo.length : mod.afterSlidesVideo);
+    const slideCount = Array.isArray(mod.slides) ? mod.slides.length : 0;
+    subItems = (slideCount > 0 ? [{ label: `Slides 1–${slideCount}` }] : [])
+      .concat(hasPostSlidesVideo ? [{ label: 'Safety Hazards Video' }] : [])
+      .concat((mod.checkpoints || []).map(cp => ({ label: `${cp.title} (after slide ${cp.afterSlide})` })))
       .concat([{ label: `Final Exam · ${mod.finalQuiz.length} questions` }]);
   } else {
     subItems = mod.sections.map((s, i) => {
@@ -4784,6 +4743,7 @@ function openPdfReport(employees) {
   .badge { background: #1a4a8c; color: white; padding: 2px 8px; border-radius: 2px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
   @media print { .no-print { display: none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head>
 <body>
 <div class="no-print" style="text-align:center; margin-bottom: 16px;">
@@ -4938,6 +4898,7 @@ function openCertificatesPdf(emp, completedMods) {
   .cert-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; color: #64748b; margin-bottom: 4px; }
   @media print { .no-print { display: none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 <div class="no-print" style="text-align:center; padding:16px; background:#f1f5f9;">
   <button onclick="window.print()" style="padding:10px 20px; background:#1a4a8c; color:white; border:none; border-radius:2px; cursor:pointer; font-weight:700;">
@@ -5650,6 +5611,7 @@ function exportSignedAttendance(emp) {
   .footer { margin-top:24px; padding-top:12px; border-top:1px solid #e2e8f0; font-size:9px; color:#94a3b8; text-align:center; }
   @media print { .no-print { display:none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
@@ -5743,6 +5705,7 @@ function exportSignedEmergency(emp) {
   .sig-detail { font-size:8px; color:#64748b; margin-top:3px; font-style:italic; }
   @media print { .no-print { display:none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
@@ -6495,6 +6458,7 @@ function exportAllForEmployee(empKey) {
   .cert-meta > div > div:not(.cert-meta-label) { font-size:13px; font-weight:700; color:#0f172a; text-align:center; }
   @media print { .no-print { display:none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
@@ -6791,6 +6755,7 @@ function exportSignedDocsForEmployee(empKey) {
 .ukg-callout { background: #eff4fb; border-left: 3px solid var(--navy); padding: 10px 14px; margin: 12px 0; font-size: 12px; color: var(--slate-700); border-radius: 0 3px 3px 0; }
 .ukg-link-pill { display: inline-block; padding: 4px 10px; background: var(--white); border: 1px solid var(--navy); border-radius: 3px; font-family: Consolas, "Courier New", monospace; font-size: 12px; font-weight: 600; color: var(--navy); }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
   <button onclick="window.print()" style="padding:10px 20px; background:#1a4a8c; color:white; border:none; border-radius:2px; font-weight:700; cursor:pointer;">Print / Save as PDF</button>
@@ -7402,6 +7367,7 @@ function exportSignedCompletion(emp) {
   .summary-box { background:${allComplete ? '#f0fdf4' : '#fef3c7'}; border-left:3px solid ${allComplete ? '#16a34a' : '#fde68a'}; padding:8px 12px; margin:8px 0; }
   @media print { .no-print { display:none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
@@ -7853,6 +7819,11 @@ function conventionalVideoPath(moduleId) {
 function conventionalSectionVideoPath(moduleId, sectionIdx) {
   const mod = MODULES.find(m => m.id === moduleId);
   if (!mod) return null;
+  // Special case: Module 9 has been eliminated. Reuse the existing Module 9
+  // safety hazards video at the end of Module 6 without requiring a duplicate upload.
+  if (moduleId === 'safety' && mod.sections && mod.sections[sectionIdx] && mod.sections[sectionIdx].heading === 'Safety Hazards Video') {
+    return 'assets/videos/module9/module9-after-slides.mp4';
+  }
   // sectionIdx is 0-based internally; filenames use 1-based to match slide images.
   return `assets/videos/module${mod.num}/module${mod.num}-section${sectionIdx + 1}.mp4`;
 }
