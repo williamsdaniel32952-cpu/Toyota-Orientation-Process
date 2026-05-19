@@ -989,6 +989,7 @@ window.supabaseClient = supabaseClient;
 console.log('Supabase Connected');
 </script>
 
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head>
 <body>
 
@@ -1556,27 +1557,13 @@ P — Point and call at all intersections. Communication between pedestrians and
 S — When walking on steps, always use the handrails and plant your feet firmly on each step. Affiliates have had significant injuries from falls on stairs.`,
       },
       {
-        heading: 'Plant Floor Hazards',
-        body: `• Always walk within GREEN walkways. Always stay behind barriers.
-• Even when there is no production, there can still be traffic throughout the plant.
-• Keep 6 ft distance from others where possible.
-• AGV paths run alongside some lines; some areas with overhead machinery & equipment require a HARD HAT.
-• Be aware of steps leading up to platforms.
-• AGVs (Automated Guided Vehicles) follow set paths outlined in ORANGE. DO NOT attempt to walk in front of a moving AGV — give them plenty of space. Walking in front of one can trigger it to stop and require reset by a TMMI TM. The safety mechanism could also fail and the AGV will not stop.
-• RED kick plates are pressure-sensitive. Do NOT step on them — they will stop the line and pose a trip hazard.
-• Uneven surfaces such as ramps pose a trip hazard. Ramps are indicated by black & yellow striped paint.
-• RESTRICTED AREAS are indicated by RED tape, chains, or other barriers. DO NOT enter restricted areas for any reason.
-• If a dolly train is blocking a walkway, WAIT for dollies to be moved. Under NO circumstances should you attempt to cross over the dollies.
-• Tugger trains: ABSOLUTELY no crossing.
-• No sitting on totes or carts. Chairs only allowed if approved by Group Leader.
-• Retractable barriers are used in some sort areas — always make sure the barrier is placed and secure before sorting.
-• Ergo mats: the BLUE X indicates the safe zone for you to stand while you work. Mats should be taped down securely.
-• Light curtains stop the line — be aware of their positions.`,
-      },
-      {
         heading: 'Door opening procedure',
         body: `When opening a car door, assume the proper stance. If on the right-hand side of the car, place your LEFT hand behind your back and open the door with your RIGHT hand. You will be facing the rear of the car. Grip the handle with a firm but gentle, closed palm — this gives you the most control and avoids ergonomic strain.`,
       },
+      {
+        heading: 'Safety Hazards Video',
+        body: `Watch the Safety Hazards video. This video reviews plant-floor hazards such as tugger trains, AGVs, red kick plates, uneven surfaces, restricted areas, dolly trains, and safe standing zones.`,
+      }
     ],
     quiz: [
       {
@@ -1644,6 +1631,36 @@ S — When walking on steps, always use the handrails and plant your feet firmly
         ],
         answer: 1,
       },
+      {
+        q: 'What should you do before crossing where tugger trains or dolly trains are moving?',
+        choices: [
+          'Cross quickly if you think you have time',
+          'Wait until the entire train has cleared the walkway',
+          'Step between the carts if they are moving slowly',
+          'Climb over the dolly connection',
+        ],
+        answer: 1,
+      },
+      {
+        q: 'Why should you never walk directly in front of a moving AGV?',
+        choices: [
+          'It may trigger a stop, and the safety system may fail',
+          'AGVs only stop for Toyota employees',
+          'AGVs are always manually driven',
+          'It is allowed if production is stopped',
+        ],
+        answer: 0,
+      },
+      {
+        q: 'What do black and yellow striped markings commonly identify?',
+        choices: [
+          'Break areas',
+          'Ramp or uneven-surface hazards',
+          'Approved storage areas',
+          'Supervisor parking zones',
+        ],
+        answer: 1,
+      }
     ],
   },
   {
@@ -1994,85 +2011,7 @@ S — When walking on steps, always use the handrails and plant your feet firmly
       },
     ],
   },
-  {
-    id: 'safety-awareness',
-    num: 9,
-    title: 'Health & Safety Awareness Training',
-    icon: 'alertTriangle',
-    estMin: 10,
-    kind: 'slides',
-    // Module 9 slides removed per current training design.
-    // The existing safety hazards video remains the only training content before the final quiz.
-    slides: [],
-    afterSlidesVideo: [
-      'assets/videos/module9/module9-after-slides.mp4',
-      'assets/videos/module9/module9-video.mp4',
-      'assets/videos/module9/module9.mp4',
-    ],
-    checkpoints: [],
-    finalQuiz: [
-      {
-        q: 'If a dolly train is blocking a walkway, what should you do?',
-        choices: [
-          'Step over the connection between dollies',
-          'Squeeze between the dollies if there is room',
-          'Stop and wait until the dollies are moved safely',
-          'Climb over the closest dolly cart',
-        ],
-        answer: 2,
-      },
-      {
-        q: 'What should you do before crossing in front of an active tugger train?',
-        choices: [
-          'Cross quickly before it reaches you',
-          'Wait until the entire train has cleared the area',
-          'Wave at the tugger and proceed',
-          'Cross between carts if the tugger is moving slowly',
-        ],
-        answer: 1,
-      },
-      {
-        q: 'Why should you never walk directly in front of a moving AGV?',
-        choices: [
-          'It may trigger a stop, and the safety system may fail',
-          'AGVs only stop for Toyota employees',
-          'AGVs are always manually driven',
-          'It is acceptable if you point first',
-        ],
-        answer: 0,
-      },
-      {
-        q: 'Red kick plates and red mats should be treated as:',
-        choices: [
-          'Approved shortcuts',
-          'No-walk safety device areas unless your work specifically requires entry',
-          'Normal walkways when production is stopped',
-          'Areas to stand on while waiting',
-        ],
-        answer: 1,
-      },
-      {
-        q: 'What do black and yellow striped markings commonly identify?',
-        choices: [
-          'Break areas',
-          'Ramp or uneven-surface hazards',
-          'Approved storage areas',
-          'Supervisor parking zones',
-        ],
-        answer: 1,
-      },
-      {
-        q: 'What does the blue X marking identify for employees performing work tasks?',
-        choices: [
-          'A designated safe standing zone',
-          'A restricted area that must never be entered',
-          'A place to store totes',
-          'A forklift-only lane',
-        ],
-        answer: 0,
-      },
-    ],
-  },
+  
 ];
 
 const TOTAL_MODULES = MODULES.length;
@@ -4804,6 +4743,7 @@ function openPdfReport(employees) {
   .badge { background: #1a4a8c; color: white; padding: 2px 8px; border-radius: 2px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
   @media print { .no-print { display: none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head>
 <body>
 <div class="no-print" style="text-align:center; margin-bottom: 16px;">
@@ -4958,6 +4898,7 @@ function openCertificatesPdf(emp, completedMods) {
   .cert-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; color: #64748b; margin-bottom: 4px; }
   @media print { .no-print { display: none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 <div class="no-print" style="text-align:center; padding:16px; background:#f1f5f9;">
   <button onclick="window.print()" style="padding:10px 20px; background:#1a4a8c; color:white; border:none; border-radius:2px; cursor:pointer; font-weight:700;">
@@ -5670,6 +5611,7 @@ function exportSignedAttendance(emp) {
   .footer { margin-top:24px; padding-top:12px; border-top:1px solid #e2e8f0; font-size:9px; color:#94a3b8; text-align:center; }
   @media print { .no-print { display:none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
@@ -5763,6 +5705,7 @@ function exportSignedEmergency(emp) {
   .sig-detail { font-size:8px; color:#64748b; margin-top:3px; font-style:italic; }
   @media print { .no-print { display:none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
@@ -6515,6 +6458,7 @@ function exportAllForEmployee(empKey) {
   .cert-meta > div > div:not(.cert-meta-label) { font-size:13px; font-weight:700; color:#0f172a; text-align:center; }
   @media print { .no-print { display:none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
@@ -6811,6 +6755,7 @@ function exportSignedDocsForEmployee(empKey) {
 .ukg-callout { background: #eff4fb; border-left: 3px solid var(--navy); padding: 10px 14px; margin: 12px 0; font-size: 12px; color: var(--slate-700); border-radius: 0 3px 3px 0; }
 .ukg-link-pill { display: inline-block; padding: 4px 10px; background: var(--white); border: 1px solid var(--navy); border-radius: 3px; font-family: Consolas, "Courier New", monospace; font-size: 12px; font-weight: 600; color: var(--navy); }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
   <button onclick="window.print()" style="padding:10px 20px; background:#1a4a8c; color:white; border:none; border-radius:2px; font-weight:700; cursor:pointer;">Print / Save as PDF</button>
@@ -7422,6 +7367,7 @@ function exportSignedCompletion(emp) {
   .summary-box { background:${allComplete ? '#f0fdf4' : '#fef3c7'}; border-left:3px solid ${allComplete ? '#16a34a' : '#fde68a'}; padding:8px 12px; margin:8px 0; }
   @media print { .no-print { display:none; } }
 </style>
+<!-- SAFETY CONSOLIDATION: Module 9 removed; existing Module 9 safety hazards video is now shown at the end of Module 6. -->
 </head><body>
 
 <div class="no-print" style="text-align:center; padding:14px; background:#f1f5f9;">
@@ -7873,6 +7819,11 @@ function conventionalVideoPath(moduleId) {
 function conventionalSectionVideoPath(moduleId, sectionIdx) {
   const mod = MODULES.find(m => m.id === moduleId);
   if (!mod) return null;
+  // Special case: Module 9 has been eliminated. Reuse the existing Module 9
+  // safety hazards video at the end of Module 6 without requiring a duplicate upload.
+  if (moduleId === 'safety' && mod.sections && mod.sections[sectionIdx] && mod.sections[sectionIdx].heading === 'Safety Hazards Video') {
+    return 'assets/videos/module9/module9-after-slides.mp4';
+  }
   // sectionIdx is 0-based internally; filenames use 1-based to match slide images.
   return `assets/videos/module${mod.num}/module${mod.num}-section${sectionIdx + 1}.mp4`;
 }
